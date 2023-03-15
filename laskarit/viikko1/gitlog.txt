@@ -2,10 +2,10 @@ commit 91c2ee28fd3d38c1135488f96b6acd483125c2c0
 Author: Teemu Junttila <teemu.junttila@protonmail.com>
 Date:   Wed Mar 15 16:25:55 2023 +0200
 
-    poistettu file1 ja uudelleennimetty file2 file22:ksi
+    poistettu file1 ja uudelleennimetty file2 file22:ksi 
 
  tiedostoja/file2             | 0
- tiedostoja/{file1 => file22} | 0
+ tiedostoja/{file1 => file22} | 0     <---- miksi???
  2 files changed, 0 insertions(+), 0 deletions(-)
 
 commit f3ffd012fe57090a041a073797c1fafaf114ad03
