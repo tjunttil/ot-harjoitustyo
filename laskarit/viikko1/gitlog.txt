@@ -1,0 +1,113 @@
+commit 91c2ee28fd3d38c1135488f96b6acd483125c2c0
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Wed Mar 15 16:25:55 2023 +0200
+
+    poistettu file1 ja uudelleennimetty file2 file22:ksi
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit f3ffd012fe57090a041a073797c1fafaf114ad03
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Wed Mar 15 16:10:12 2023 +0200
+
+    lisätty tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 6ac902d04c8fb5520baabee004d719f8de1c0003
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Wed Mar 15 16:04:38 2023 +0200
+
+    muokattu tiedostoja
+
+ eka.txt    | 3 ++-
+ kolmas.txt | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+commit 91b6279443ae31e7d61229d0098c26495f5a66e5
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Wed Mar 15 15:47:39 2023 +0200
+
+    poistettu ilmeisesti tiedosto ja luotu eka tiedosto sen tilalle
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 74f01054cbdadfd02ef6925c427976defdcbeb57
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Wed Mar 15 15:45:41 2023 +0200
+
+    poistettu toinen tiedosto
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 5c682d5f941ba50d6d016fa82ee6f388e4512926
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Wed Mar 15 15:42:33 2023 +0200
+
+    poistettu turhuuksia ja lisätty erittäin painava kysymys
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 62aebccd3f8c862b66732d076279a49ac3551287
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Wed Mar 15 15:40:33 2023 +0200
+
+    lisätty tiedostoon taas vähän tekstiä
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 8bf8e79eee3a436f557bfe8ec3ab7727db7daa50
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Tue Mar 14 16:04:48 2023 +0200
+
+    lisättiin vielä kaikenlaista kamaa
+
+ stuff/jokin_tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit e76b31c331ef606dd0e901875b297ea62e544737
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Tue Mar 14 16:03:08 2023 +0200
+
+    lisättiin tekstiä
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 722b1810634eaa8a363f7b166a4e6cc0a9e2e187
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Tue Mar 14 16:01:16 2023 +0200
+
+    lisättiin vielä kolmas
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit f9e54d675c87250b8b6d6455092e5bef38d2d530
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Tue Mar 14 15:57:34 2023 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 8cee47bfee9732a04d21b3e2f47a8c4842a7b5e2
+Author: Teemu Junttila <teemu.junttila@protonmail.com>
+Date:   Tue Mar 14 15:54:48 2023 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
