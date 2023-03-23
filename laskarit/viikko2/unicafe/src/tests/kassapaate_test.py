@@ -86,12 +86,23 @@ class TestKassapaate(unittest.TestCase):
         self.assertEqual((maksukortti.saldo, self.kassapaate.maukkaat, tulos), (300, 0, False))
     
     def test_kassa_ei_muutu_korttiostoissa(self):
+        toiminnot = [lambda x: self.kassapaate.syo_edullisesti_kortilla(x), lambda x: self.kassapaate.syo_maukkaasti_kortilla(x)]
         maksukortti = Maksukortti(200)
-        self.kassapaate.syo_edullisesti_kortilla(self.maksukortti)
-        kassa1 = self.kassapaate.kassassa_rahaa
-        self.kassapaate.syo_maukkaasti_kortilla(self.maksukortti)
-        kassa2 = self.kassapaate.kassassa_rahaa
-        self.k
+        kortit = [self.maksukortti, maksukortti]
+        kassat = []
+        for t in toiminnot:
+            for k in kortit:
+                t(k)
+                kassat.append(self.kassapaate.kassassa_rahaa)
+        self.assertEqual(kassat, [100000,100000,100000,100000])
+
+    def test_rahan_lataaminen_lisaa_saldoa_ja_kassaa(self):
+        self.kassapaate.lataa_rahaa_kortille(self.maksukortti, 200)
+        self.assertEqual((self.kassapaate.kassassa_rahaa, self.maksukortti.saldo), (100200, 1200))
+
+    def test_negatiivisen_rahasumman_lataaminen_ei_muuta_mitaan(self):
+        self.kassapaate.lataa_rahaa_kortille(self.maksukortti, -150)
+        self.assertEqual((self.kassapaate.kassassa_rahaa, self.maksukortti.saldo), (100000, 1000))
 
 
 
