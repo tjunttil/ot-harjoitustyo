@@ -1,4 +1,4 @@
-## Luokkakaavio monopolille
+## Laajennettu luokkakaavio monopolille
 
 ```mermaid
 
@@ -18,19 +18,19 @@
         
         Ruutu "1" -- "*" Pelinappula
         
-        Ruutu <-- Aloitusruutu
+        Ruutu <|-- Aloitusruutu
         
-        Ruutu <- Vankila
+        Ruutu <|-- Vankila
         
-        Ruutu <-- Sattuma
+        Ruutu <|-- Sattuma
         
-        Ruutu <-- Yhteismaa
+        Ruutu <|-- Yhteismaa
         
-        Ruutu <-- Asema
+        Ruutu <|-- Asema
         
-        Ruutu <-- Laitos
+        Ruutu <|-- Laitos
         
-        Ruutu <-- Katu
+        Ruutu <|-- Katu
         
         Kortti "*" -- "0..1" Sattuma
         
