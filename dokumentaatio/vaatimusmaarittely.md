@@ -18,7 +18,7 @@ pelin
 
 ### Tuloslistan tarkastelu
 
-- Listassa on 
+- Listassa on pelaajat ja heidän saamansa pistemäärät listattuna pistemäärien mukaisessa järjestyksessä suurimmasta pienimpään
 
 ### Pelin aloituksen jälkeen
 
