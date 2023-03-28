@@ -8,16 +8,16 @@
         Ruutu "40" --> "1" Pelilauta
         Ruutu "1" --> "*" Pelinappula
         Pelaaja "1" --> "1" Pelinappula
-        class Peli {
+        class Peli{
         }
-        class Pelaaja {
+        class Pelaaja{
         }
-        class Pelilauta {
+        class Pelilauta{
         }
-        class Ruutu {
+        class Ruutu{
             seuraava_ruutu
         }
-        class Pelinappula {
+        class Pelinappula{
         }
-        class Noppa {
+        class Noppa{
         }
