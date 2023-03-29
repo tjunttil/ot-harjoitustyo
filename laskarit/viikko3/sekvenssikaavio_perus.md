@@ -1,11 +1,11 @@
 ```mermaid
 
   sequenceDiagram
-     ->>machine: Machine()
+     main->>machine: Machine()
      machine ->> tank: FuelTank()
      machine ->> tank: fill(40)
      machine ->> engine: Engine(tank)
-     ->>machine: drive()
+     main->>machine: drive()
      activate machine
      machine ->> engine: start()
      activate engine
@@ -24,7 +24,7 @@
      engine ->> tank: consume(10)
      engine --> machine
      deactivate engine
-     machine -->
+     machine --> main
      deactivate machine
 ```
      
