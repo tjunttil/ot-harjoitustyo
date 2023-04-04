@@ -3,7 +3,7 @@ from entities.space import Space
 
 class GameLoop:
     def __init__(self, scale):
-        self.display = pygame.display.set_mode(640*scale,480*scale)
+        self.display = pygame.display.set_mode((640*scale,480*scale))
         self.clock = pygame.time.Clock()
         self.space = Space(scale)
         self.points = 0
@@ -13,7 +13,7 @@ class GameLoop:
         while True:
             for event in pygame.event.get():
                 if self.event_handler(event) == False:
-                    break
+                    exit()
             self.draw()
             self.clock.tick(60)
 
@@ -27,14 +27,11 @@ class GameLoop:
             direction = directions[event.key]
             self.space.change_ship_velocity(direction, change)
             self.space.move_ship
+            print("key press detected")
         if t == pygame.QUIT:
             return False
 
     def draw(self):
-        pass
-
-
-            
-
-
-
+        self.display.fill((0,0,0))
+        self.space.all_sprites.draw(self.display)
+        pygame.display.update()
