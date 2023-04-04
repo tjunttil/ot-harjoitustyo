@@ -2,7 +2,7 @@
 
 | päivä | aika | mitä tein |
 | :---: |:-----| :-----|
-| 27.3. | 1    | vaatimusmäärittelyn laatimista, pygameen tutustumista |
-| 28.3. | 0.5  | alustavan vaatimusmäärittelydokumentin viimeistely |
-| 29.3. | 1    | sovelluksen rakenteen hahmottelua
-| yht   | 1.5  | |
+| 29.3. | 1    | sovelluksen rakenteen hahmottelua |
+| 3.4.  | 1    | testien kirjoittelua, pääluokkien laatimista |
+| 4.4.  | 1    | testien kirjoittelua, vikojen korjailua |
+| yht   | 3    | |

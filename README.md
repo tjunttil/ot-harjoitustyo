@@ -1,15 +1,9 @@
-# README
-## Tehtävät
-**Viikko 1**
+# Asteroidit
 
-*Tällaisia vastauksia tällä kertaa:*
+## Dokumentaatio
 
-[gitlog.txt](https://github.com/tjunttil/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+- [Vaatimusmäärittely](https://github.com/tjunttil/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
 
-[komentorivi.txt](https://github.com/tjunttil/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+- [Työaikakirjanpito](https://github.com/tjunttil/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
-**Viikko 2**
-
-[vaatimusmaarittely.md](https://github.com/tjunttil/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
-
-[tyoaikakirjanpito.md](https://github.com/tjunttil/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+- [Changelog]
