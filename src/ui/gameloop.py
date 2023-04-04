@@ -14,6 +14,7 @@ class GameLoop:
             for event in pygame.event.get():
                 if self.event_handler(event) == False:
                     exit()
+            self.space.move_objects()
             self.draw()
             self.clock.tick(60)
 
@@ -26,8 +27,6 @@ class GameLoop:
             change = movement[t]
             direction = directions[event.key]
             self.space.change_ship_velocity(direction, change)
-            self.space.move_ship
-            print("key press detected")
         if t == pygame.QUIT:
             return False
 

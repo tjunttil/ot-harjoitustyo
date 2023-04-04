@@ -11,8 +11,12 @@ class Space:
     def change_ship_velocity(self, direction, change):
         self.ship.change_velocity(direction, change)
 
+    def move_objects(self):
+        self.move_ship()
+        #self.move_asteroids()
+
     def move_ship(self):
         self.ship.angle += self.ship.angular_velocity
         angle = self.ship.angle
-        x = self.ship.velocity
-        self.ship.rect.move_ip(int(x*math.cos(angle)),int(x*math.sin(angle)))
+        v = self.ship.velocity
+        self.ship.rect.move_ip(int(v*math.cos(angle)),int(v*math.sin(angle)))
