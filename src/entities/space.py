@@ -1,10 +1,11 @@
-import pygame
 import math
+import pygame
 from entities.sprites.ship import Ship
+
 
 class Space:
     def __init__(self, scale):
-        self.ship = Ship()
+        self.ship = Ship(320*scale, 240*scale)
         self.all_sprites = pygame.sprite.Group()
         self.all_sprites.add(self.ship)
 
@@ -13,10 +14,12 @@ class Space:
 
     def move_objects(self):
         self.move_ship()
-        #self.move_asteroids()
+        # self.move_asteroids()
 
     def move_ship(self):
         self.ship.angle += self.ship.angular_velocity
         angle = self.ship.angle
-        v = self.ship.velocity
-        self.ship.rect.move_ip(int(v*math.cos(angle)),int(v*math.sin(angle)))
+        self.ship.rotate(angle)
+        velocity = self.ship.velocity
+        self.ship.rect.move_ip(int(velocity*math.cos(angle)),
+                               int(velocity*math.sin(angle)))
