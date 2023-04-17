@@ -1,9 +1,6 @@
-import os
 import pygame
 from .entity import Entity
 from .plasma import Plasma
-
-dirname = os.path.dirname(__file__)
 
 class Ship(Entity):
     def __init__(self, coordinates):
