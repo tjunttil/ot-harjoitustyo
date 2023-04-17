@@ -29,9 +29,12 @@ class GameLoop:
         event_type = event.type
         for k in movement:
             if event_type == k:
-                change = movement[event_type]
-                direction = directions[event.key]
-                self.space.change_ship_velocity(direction, change)
+                try:
+                    change = movement[event_type]
+                    direction = directions[event.key]
+                    self.space.change_ship_velocity(direction, change)
+                except KeyError:
+                    pass
         if event_type == pygame.QUIT:
             return False
         return True

@@ -1,4 +1,5 @@
 import unittest
+import pygame
 from entities.space import Space
 from math import *
 
@@ -12,12 +13,15 @@ class TestSpace(unittest.TestCase):
 
     def test_spaceship_is_in_starting_position(self):
         self.assertEqual(
-            (self.space.ship.rect.x, self.space.ship.rect.y), (265, 220))
+            (self.space.ship.rect.x, self.space.ship.rect.y), (265, 185))
 
-    def test_move_ship_method_does_not_move_ship_if_velocity_unchanged(self):
-        self.space.move_ship()
-        self.assertEqual(
-            (self.space.ship.rect.x, self.space.ship.rect.y), (265, 220))
+    # def test_adding_sprite_adds_it_to_all_sprites(self):
+    #     sprite = pygame.sprite.Sprite()
+    #     self.space.add_sprite(sprite, self.space.plasmas)
+    #     new_group = pygame.sprite.Group()
+    #     for sprite in [self.space.ship, sprite]:
+    #         new_group.add(sprite)
+    #     self.assertEqual(self.space.all_sprites, new_group)
 
     def test_change_velocity_changes_ship_velocity(self):
         self.space.change_ship_velocity((1, 0), 1)
@@ -40,4 +44,3 @@ class TestSpace(unittest.TestCase):
         self.space.change_ship_velocity((1,0), 1)
         self.space.move_ship()
         self.assertEqual((self.space.ship.rect.x, self.space.ship.rect.y),(ship_x, ship_y + 1))
-

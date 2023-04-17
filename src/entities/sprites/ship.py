@@ -1,21 +1,15 @@
 import os
 import pygame
+from .entity import Entity
 from .plasma import Plasma
 
 dirname = os.path.dirname(__file__)
 
-class Ship(pygame.sprite.Sprite):
-    def __init__(self, x, y):
-        super().__init__()
-        self.og_image = pygame.image.load(os.path.join(
-            dirname, "..", "..", "assets", "ship.png"))
-        self.image = self.og_image
-        self.rect = self.image.get_rect()
-        self.rect.x = x - self.image.get_width()/2
-        self.rect.y = y - self.image.get_width()/2
+class Ship(Entity):
+    def __init__(self, coordinates):
+        super().__init__(coordinates, pygame.math.Vector2(1,0), 0, "ship.png")
+        self.og_image = self.image
         self.angle = 0
-        self.direction = pygame.math.Vector2(1,0)
-        self.velocity = 0
         self.angular_velocity = 0
 
     def change_velocity(self, direction, change):
@@ -32,16 +26,20 @@ class Ship(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center = self.rect.center)
 
     def fire_plasma(self):
-        # Alrighty, so we need to make a vector 
-        # direction*length_of_ship_from_center_to_tip
-        # and append it to the center to get the location of the tip
-        # and pass this to be the starting point of the plasma 
-        #return Plasma()
         center_vector = pygame.math.Vector2(self.rect.center)
         ship_length_vector = self.direction * self.og_image.get_width()/2
         tip_location_vector = center_vector + ship_length_vector
         return Plasma(tuple(tip_location_vector), self.direction)
 
+    def update_position(self):
+        self.angle += self.angular_velocity
+        super().update_position()
+
+    def move(self):
+        self.update_position()
+        angle = self.angle
+        self.rotate(angle)
+        super().move()
 
     @property
     def angle(self):
