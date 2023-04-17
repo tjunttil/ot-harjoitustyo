@@ -1,5 +1,6 @@
 import os
 import pygame
+from .plasma import Plasma
 
 dirname = os.path.dirname(__file__)
 
@@ -29,6 +30,18 @@ class Ship(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.og_image, angle)
         self.direction = pygame.math.Vector2(1,0).rotate(-angle)
         self.rect = self.image.get_rect(center = self.rect.center)
+
+    def fire_plasma(self):
+        # Alrighty, so we need to make a vector 
+        # direction*length_of_ship_from_center_to_tip
+        # and append it to the center to get the location of the tip
+        # and pass this to be the starting point of the plasma 
+        #return Plasma()
+        center_vector = pygame.math.Vector2(self.rect.center)
+        ship_length_vector = self.direction * self.og_image.get_width()/2
+        tip_location_vector = center_vector + ship_length_vector
+        return Plasma(tuple(tip_location_vector), self.direction)
+
 
     @property
     def angle(self):
