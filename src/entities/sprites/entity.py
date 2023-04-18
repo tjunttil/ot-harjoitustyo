@@ -21,6 +21,7 @@ class Entity(pygame.sprite.Sprite):
         self.rect.move_ip(int(delta[0]),int(delta[1]))
 
     def load_image(self, image_name):
+        # method to load the entity image and create a corresponding rect-object
         self.image = pygame.image.load(os.path.join(
             dirname, "..", "..", "assets", image_name))
         self.rect = self.image.get_rect()

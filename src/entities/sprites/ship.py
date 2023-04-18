@@ -6,7 +6,7 @@ class Ship(Entity):
     def __init__(self, coordinates):
         super().__init__(coordinates, pygame.math.Vector2(1,0), 0)
         super().load_image("ship.png")
-        self.og_image = self.image
+        self.original_image = self.image
         self.angle = 0
         self.angular_velocity = 0
 
@@ -19,13 +19,13 @@ class Ship(Entity):
         self.angular_velocity += change*angular_velocity
 
     def rotate(self, angle):
-        self.image = pygame.transform.rotate(self.og_image, angle)
+        self.image = pygame.transform.rotate(self.original_image, angle)
         self.direction = pygame.math.Vector2(1,0).rotate(-angle)
         self.rect = self.image.get_rect(center = self.rect.center)
 
     def calculate_tip_position(self):
         center_vector = pygame.math.Vector2(self.rect.center)
-        ship_length_vector = self.direction * self.og_image.get_width()/2
+        ship_length_vector = self.direction * self.original_image.get_width()/2
         return center_vector + ship_length_vector
 
     def fire_plasma(self):
