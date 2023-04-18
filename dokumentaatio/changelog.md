@@ -16,3 +16,14 @@
 ## Viikko 4
 
 - Saatu alus liikkumaan ja kääntymään oikein
+
+
+## Viikko 5
+
+- Luotu Plasma-luokka, joka edustaa aluksen ampumia plasmapalluroita.
+- Lisätty toiminnallisuus, jossa Ship-olio pystyy välilyöntinäppäimellä ampumaan 
+Plasma-olioita.
+- Luotu Entity-luokka käytettävien sprite-olioiden yläluokaksi, joka hoitaa näille 
+yhteiset alustustoimenpiteet ja määrittelee yhteiset päivitys- ja liikkumismetodit 
+joita Space-olio voi kutsua.
+- Korjattu testejä vastaamaan uutta luokkarakennetta.
