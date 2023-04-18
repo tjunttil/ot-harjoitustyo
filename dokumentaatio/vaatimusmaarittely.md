@@ -22,8 +22,8 @@ pelin
 
 ### Pelin aloituksen jälkeen
 
-- Käyttäjä pystyy ohjaamaan avaruusalusta nuolinäppäimillä
-- Käyttäjä pystyy ampumaan avaruusaluksen lasertykillä välilyöntinäppäimellä
+- Käyttäjä pystyy ohjaamaan avaruusalusta nuolinäppäimillä (tehty)
+- Käyttäjä pystyy ampumaan avaruusaluksen lasertykillä välilyöntinäppäimellä (tehty)
 - Asteroideja ilmestyy ruudun reunojen takaa satunnaisesti
 - Avaruusalus tuhoutuu ja peli päättyy jos alus törmää asteroidiin
 - Asteroideja pystyy tuhoamaan lasertykillä, mistä saa pisteitä
