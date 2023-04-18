@@ -21,7 +21,6 @@
       class Plasma{
       }
       class Space{
-          plasmas
           all_sprites
       }
       class Asteroid{
