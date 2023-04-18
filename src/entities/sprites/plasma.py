@@ -2,5 +2,6 @@ from .entity import Entity
 
 class Plasma(Entity):
     def __init__(self, coordinates, direction):
-        super().__init__(coordinates, direction, 20, "plasma.png")
+        super().__init__(coordinates, direction, 20)
+        super().load_image("plasma.png")
         

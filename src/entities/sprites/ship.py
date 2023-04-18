@@ -4,7 +4,8 @@ from .plasma import Plasma
 
 class Ship(Entity):
     def __init__(self, coordinates):
-        super().__init__(coordinates, pygame.math.Vector2(1,0), 0, "ship.png")
+        super().__init__(coordinates, pygame.math.Vector2(1,0), 0)
+        super().load_image("ship.png")
         self.og_image = self.image
         self.angle = 0
         self.angular_velocity = 0
@@ -22,10 +23,13 @@ class Ship(Entity):
         self.direction = pygame.math.Vector2(1,0).rotate(-angle)
         self.rect = self.image.get_rect(center = self.rect.center)
 
-    def fire_plasma(self):
+    def calculate_tip_position(self):
         center_vector = pygame.math.Vector2(self.rect.center)
         ship_length_vector = self.direction * self.og_image.get_width()/2
-        tip_location_vector = center_vector + ship_length_vector
+        return center_vector + ship_length_vector
+
+    def fire_plasma(self):
+        tip_location_vector = self.calculate_tip_position()
         return Plasma(tuple(tip_location_vector), self.direction)
 
     def update_position(self):
