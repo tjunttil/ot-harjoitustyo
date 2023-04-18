@@ -12,7 +12,7 @@
           velocity
       }
       class Ship{
-          og_image
+          original_image
           angle
           angular_velocity
       }
