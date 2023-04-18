@@ -37,11 +37,3 @@ class Ship(Entity):
         angle = self.angle
         self.rotate(angle)
         super().move()
-
-    @property
-    def angle(self):
-        return self._angle
-
-    @angle.setter
-    def angle(self, value):
-        self._angle = value

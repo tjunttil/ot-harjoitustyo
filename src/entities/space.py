@@ -14,9 +14,6 @@ class Space:
         group.add(sprite)
         self.all_sprites.add(sprite)
 
-    def change_ship_velocity(self, direction, change):
-        self.ship.change_velocity(direction, change)
-
     def move_objects(self):
         for entity in self.all_sprites:
             entity.move()
