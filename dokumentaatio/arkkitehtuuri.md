@@ -2,8 +2,10 @@
  classDiagram
       Ship "1" -- "1" Space
       Plasma "*" -- "1" Space
+      Asteroid "*" -- "1" Space
       Ship --|> Entity
       Plasma --|> Entity
+      Asteroid --|> Entity
       class Entity{
           pos
           image
@@ -19,7 +21,9 @@
       class Plasma{
       }
       class Space{
-          plasmas
           all_sprites
+      }
+      class Asteroid{
+          size
       }
 ```
