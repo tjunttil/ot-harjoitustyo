@@ -15,6 +15,7 @@ class GameLoop:
             for event in pygame.event.get():
                 if not self.event_handler(event):
                     exit()
+            self.space.create_asteroid()
             self.space.move_objects()
             self.draw()
             self.clock.tick(60)
@@ -42,8 +43,10 @@ class GameLoop:
             self.space.fire_ship_cannon()
 
     def handle_quitting(self, event):
-        # Should add using Escape key as well
-        if event.type == pygame.QUIT:
+        # Exit the game by pressing Escape key or closing the application 
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            return False
+        elif event.type == pygame.QUIT:
             return False
         return True
 
