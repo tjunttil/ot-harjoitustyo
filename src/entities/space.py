@@ -42,14 +42,14 @@ class Space:
         #         self.add_sprite(child)
         #     points += 1
         # return points
-        return len(pygame.sprite.groupcollide(self.plasmas, self.asteroids, True, True))
+        return len(pygame.sprite.groupcollide(self.plasmas, self.asteroids, True, True, collided = pygame.sprite.collide_circle))
 
     def handle_asteroid_collision(self):
         pass
 
     def handle_collisions(self):
+        self.handle_plasma_hits()
         return self.check_ship_destruction()
-        # self.handle_plasma_hits()
         # self.handle_asteroid_collision()
 
     def random_parameters(self, w, h):

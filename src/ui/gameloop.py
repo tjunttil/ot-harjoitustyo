@@ -63,4 +63,7 @@ class GameLoop:
     def draw(self):
         self.display.fill((0, 0, 0))
         self.space.all_sprites.draw(self.display)
+        #TESTING
+        #for p in self.space.ship.collide_points:
+        #    pygame.draw.circle(self.display, (255,0,0), (p[0], p[1]), 5)
         pygame.display.update()
