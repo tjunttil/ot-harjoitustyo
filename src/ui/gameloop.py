@@ -9,6 +9,9 @@ class GameLoop:
         self.space = Space(scale)
         self.points = 0
 
+    def game_over(self):
+        exit()
+
     def start(self):
         pygame.init()
         while True:
@@ -17,6 +20,8 @@ class GameLoop:
                     exit()
             self.space.create_asteroid()
             self.space.move_objects()
+            if self.space.handle_collisions():
+                self.game_over()
             self.draw()
             self.clock.tick(60)
 

@@ -9,6 +9,7 @@ class Ship(Entity):
         self.original_image = self.image
         self.angle = 0
         self.angular_velocity = 0
+        self.collide_points = self.calculate_collide_points()
 
     def change_velocity(self, direction, change):
         linear_velocity, angular_velocity = direction
@@ -23,13 +24,20 @@ class Ship(Entity):
         self.direction = pygame.math.Vector2(1,0).rotate(-angle)
         self.rect = self.image.get_rect(center = self.rect.center)
 
-    def calculate_tip_position(self):
+    def calculate_collide_points(self):
         center_vector = pygame.math.Vector2(self.rect.center)
         ship_length_vector = self.direction * self.original_image.get_width()/2
-        return center_vector + ship_length_vector
+        ship_width_vector = self.direction.rotate(-90) * self.original_image.get_height()/2
+        tip = center_vector + ship_length_vector
+        left_side = center_vector + ship_width_vector
+        right_side = center_vector - ship_width_vector
+        left_corner = center_vector + 2 * ship_width_vector - ship_length_vector
+        right_corner = center_vector - 2 * ship_width_vector - ship_length_vector
+        back = center_vector - ship_length_vector
+        return [tip, left_side, right_side, left_corner, right_corner, back]
 
     def fire_plasma(self):
-        tip_location_vector = self.calculate_tip_position()
+        tip_location_vector = self.calculate_collide_poinst()[0]
         return Plasma(tuple(tip_location_vector), self.direction)
 
     def update_position(self):
