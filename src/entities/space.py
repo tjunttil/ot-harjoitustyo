@@ -26,6 +26,9 @@ class Space:
         plasma = self.ship.fire_plasma()
         self.add_sprite(plasma, self.plasmas)
 
+    def change_ship_velocity(self, direction, change):
+        self.ship.change_velocity(direction, change)
+
     def check_ship_destruction(self):
         for collide_point in self.ship.collide_points:
             for asteroid in self.asteroids:
@@ -42,7 +45,8 @@ class Space:
         #         self.add_sprite(child)
         #     points += 1
         # return points
-        return len(pygame.sprite.groupcollide(self.plasmas, self.asteroids, True, True, collided = pygame.sprite.collide_circle))
+        return len(pygame.sprite.groupcollide(
+            self.plasmas, self.asteroids, True, True, collided = pygame.sprite.collide_circle))
 
     def handle_asteroid_collision(self):
         pass

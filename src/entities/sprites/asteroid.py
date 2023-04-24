@@ -5,4 +5,3 @@ class Asteroid(Entity):
         super().__init__(coordinates, direction, velocity)
         super().load_image("asteroid.png")
         self.size = size
-        self.radius = self.image.get_height()/2

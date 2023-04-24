@@ -11,6 +11,7 @@ class Entity(pygame.sprite.Sprite):
         self.pos = pygame.Vector2(coordinates)
         self.direction = direction
         self.velocity = velocity
+        self.radius = 0
 
     def update_position(self):
         self.pos += self.direction * self.velocity
@@ -25,5 +26,6 @@ class Entity(pygame.sprite.Sprite):
         self.image = pygame.image.load(os.path.join(
             dirname, "..", "..", "assets", image_name))
         self.rect = self.image.get_rect()
+        self.radius = self.image.get_height()/2
         self.rect.x = self.pos[0] - self.image.get_width()/2
         self.rect.y = self.pos[1] - self.image.get_width()/2
