@@ -24,10 +24,10 @@ pelin
 
 - Käyttäjä pystyy ohjaamaan avaruusalusta nuolinäppäimillä (tehty)
 - Käyttäjä pystyy ampumaan avaruusaluksen lasertykillä välilyöntinäppäimellä (tehty)
-- Asteroideja ilmestyy ruudun reunojen takaa satunnaisesti
-- Avaruusalus tuhoutuu ja peli päättyy jos alus törmää asteroidiin
-- Asteroideja pystyy tuhoamaan lasertykillä, mistä saa pisteitä
-- Pelaajan pistemäärä näkyy näytöllä
+- Asteroideja ilmestyy ruudun reunojen takaa satunnaisesti (tehty)
+- Avaruusalus tuhoutuu ja peli päättyy jos alus törmää asteroidiin (tehty)
+- Asteroideja pystyy tuhoamaan lasertykillä, mistä saa pisteitä (tehty)
+- Pelaajan pistemäärä näkyy näytöllä (tehty)
 - Pelin päätyttyä käyttäjä voi tallentaa tuloksensa tuloslistaan syöttämällä 
 pelaajanimen
 
