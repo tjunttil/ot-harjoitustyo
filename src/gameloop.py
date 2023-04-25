@@ -5,7 +5,8 @@ class GameLoop:
         self.__event_queue = event_queue
         self.__clock = clock
         self.__space = space
-        #self.__points = 0
+        self.__points = 0
+        self.__game_over = False
 
     def __handle_commands(self, commands):
         if commands["quit"]:
@@ -25,19 +26,19 @@ class GameLoop:
                 return False
         return True
 
-    def game_over(self):
-        exit()
-
     def __update_space(self):
         self.__space.create_asteroid()
         self.__space.move_objects()
-        if self.__space.handle_collisions():
-            self.game_over()
+        plasma_hits, ship_destruction = self.__space.handle_collisions()
+        if ship_destruction:
+            self.__game_over = True
+        self.__points += plasma_hits
 
     def start(self):
         while True:
             if not self.__handle_events():
                 break
-            self.__update_space()
-            self.__renderer.draw()
+            if not self.__game_over:
+                self.__update_space()
+            self.__renderer.draw(self.__points, self.__game_over)
             self.__clock.tick(60)

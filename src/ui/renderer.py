@@ -5,10 +5,19 @@ class Renderer:
         self.__display = display
         self.__space = space
 
-    def draw(self):
+    def draw(self, points, game_over = False):
         self.__display.fill((0, 0, 0))
         self.__space.all_sprites.draw(self.__display)
-        #TESTING
-        #for p in self.space.ship.collide_points:
-        #    pygame.draw.circle(self.display, (255,0,0), (p[0], p[1]), 5)
+        if not game_over:
+            font = pygame.font.SysFont("Arial", 20)
+            point_text = font.render(f"Points: {points}", True, (255,255,255))
+            self.__display.blit(point_text, (0,0))
+        else:
+            font = pygame.font.SysFont("Arial", 40)
+            game_over_text = font.render(f"GAME OVER", True, (255, 0, 0))
+            points_text = font.render(f"POINTS: {points}", True, (255, 0, 0))
+            game_over_rect = game_over_text.get_rect(center = (320, 200))
+            points_rect = points_text.get_rect(center = (320, 240))
+            self.__display.blit(game_over_text, game_over_rect)
+            self.__display.blit(points_text, points_rect)
         pygame.display.update()

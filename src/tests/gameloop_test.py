@@ -45,3 +45,6 @@ class TestGameLoop(unittest.TestCase):
         result = self.gameloop._GameLoop__handle_commands(commands)
         new_velocity = self.gameloop._GameLoop__space.ship.velocity
         self.assertEqual((new_velocity, result),(5,True))
+
+    def test_points_increase_when_plasma_hits_asteroid(self):
+        self.gameloop._GameLoop__space.add_entity()

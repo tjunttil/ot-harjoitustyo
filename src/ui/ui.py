@@ -18,4 +18,5 @@ class UI:
         renderer = Renderer(self.display, space)
         game = GameLoop(renderer, space, self.event_handler, self.event_queue, self.clock)
         pygame.init()
+        pygame.display.set_caption("Asteroids")
         game.start()

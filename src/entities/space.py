@@ -52,8 +52,7 @@ class Space:
         pass
 
     def handle_collisions(self):
-        self.handle_plasma_hits()
-        return self.check_ship_destruction()
+        return self.handle_plasma_hits(), self.check_ship_destruction()
         # self.handle_asteroid_collision()
 
     def random_parameters(self, w, h):
