@@ -35,7 +35,7 @@ joita Space-olio voi kutsua.
 - Lisätty pisteiden näkyminen pelinäytöllä.
 - Lisätty pelin lopetusnäkymä, jossa näkyy pelaajan saamat pisteet.
 - Refaktoroitu koodia merkittävästi, seuraavalla tavalla:
-  - Luotu uudet luokat yleisimmille pygame-toiminnoille: Clock, Renderer, Event_handler, Event_queue
-  - Luotu erillinen UI-luokka joka alustaa ja käynnistää käyttöliittymän
+  - Luotu uudet luokat yleisimmille pygame-toiminnoille: Clock, Renderer, Event_handler, Event_queue.
+  - Luotu erillinen UI-luokka joka alustaa ja käynnistää käyttöliittymän.
 - Testattu että gameloop aiheuttaa oikeat muutokset kun käskyinä tulee pelin lopettaminen tai aluksen nopeuden muutos.
 - Testattu että plasman ampuminen lisää plasman Space-luokan plasmas-ryhmään, ja että tuotetun plasman suunta on sama kuin aluksen.
