@@ -1,11 +1,18 @@
 # Asteroidit
 
-Sovellus on peli, jossa käyttäjä ohjaa avaruusalusta, ja tavoitteena on tuhota tielle osuneet asteroidit.
+Sovellus on peli, jossa käyttäjä ohjaa avaruusalusta. Tavoitteena on tuhota tielle osuneet asteroidit.
 
 ## Asennus
 
 1. `poetry install` asentaa sovelluksen riippuvuudet
 2. `poetry run invoke start` käynnistää sovelluksen
+
+## Komentorivikomennot
+
+1. ### Käynnistys
+2. ### Testaus
+3. ### Pylint
+
 
 ## Dokumentaatio
 
