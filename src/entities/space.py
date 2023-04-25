@@ -14,9 +14,9 @@ class Space:
         self.all_sprites = pygame.sprite.Group()
         self.all_sprites.add(self.ship)
 
-    def add_sprite(self,sprite, group):
-        group.add(sprite)
-        self.all_sprites.add(sprite)
+    def add_entity(self,entity, group):
+        group.add(entity)
+        self.all_sprites.add(entity)
 
     def move_objects(self):
         for entity in self.all_sprites:
@@ -24,7 +24,7 @@ class Space:
 
     def fire_ship_cannon(self):
         plasma = self.ship.fire_plasma()
-        self.add_sprite(plasma, self.plasmas)
+        self.add_entity(plasma, self.plasmas)
 
     def change_ship_velocity(self, direction, change):
         self.ship.change_velocity(direction, change)
@@ -70,4 +70,4 @@ class Space:
         if randint(20*self.difficulty,500) == 100:
             coordinates, direction = self.random_parameters(111,137)
             asteroid = Asteroid(coordinates, direction, self.difficulty/3, 1)
-            self.add_sprite(asteroid, self.asteroids)
+            self.add_entity(asteroid, self.asteroids)
