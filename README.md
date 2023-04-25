@@ -9,25 +9,26 @@ Sovellus on peli, jossa käyttäjä ohjaa avaruusalusta. Tavoitteena on tuhota t
 
 ## Komentorivikomennot
 
-1. ### Käynnistys
+### 1. Käynnistys
 
-Kuten jo edellä todettiin, sovelluksen saa käynnistettyä käskyllä 
+Kuten jo edellä todettiin, sovelluksen saa käynnistettyä käskyllä: 
 
 `poetry run invoke start`
 
-2. ### Testaus
+### 2. Testaus
 
-Testit saa ajettua käskyllä
+Testit saa ajettua käskyllä:
 
 `poetry run invoke test`
 
-Testikattavuusraportti tuotetaan käskyllä
+Testikattavuusraportti tuotetaan käskyllä:
 
 `poetry run invoke coverage-report`
 
-3. ### Pylint
+### 3. Pylint
 
-Sovelluksen pylint-tarkistukset voi selvittää komennolla
+Sovelluksen pylint-tarkistukset voi selvittää käskyllä:
+
 `poetry run invoke lint`
 
 
