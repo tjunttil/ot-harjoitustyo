@@ -4,6 +4,8 @@ Sovellus on peli, jossa käyttäjä ohjaa avaruusalusta. Tavoitteena on tuhota t
 
 ## Asennus
 
+Sovelluksen ajaminen ongelmitta edellyttää vähintään python version 3.8.
+
 1. `poetry install` asentaa sovelluksen riippuvuudet
 2. `poetry run invoke start` käynnistää sovelluksen
 
