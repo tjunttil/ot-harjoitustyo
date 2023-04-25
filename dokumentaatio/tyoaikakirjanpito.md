@@ -8,4 +8,6 @@
 | 13.4. | 0.5  | uusien luokkien laatimista |
 | 17.4. | 2    | koodin refaktorointia, testien uudelleenkirjoittamista |
 | 18.4. | 1    | uuden toiminnallisuuden lisäämistä, testien korjailua |
-| yht   | 6.5  | |
+| 24.4. | 2.5  | refaktorointia, testien kirjoittamista |
+| 25.4. | 2.5  | uuden toiminnallisuuden lisäämistä, refaktorointia, testien kirjoittamista |
+| yht   | 11.5  | |
