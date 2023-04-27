@@ -28,6 +28,10 @@ class TestShip(unittest.TestCase):
         self.ship.change_velocity((1,1),-1)
         self.assertEqual((self.ship.velocity, self.ship.angular_velocity), (-1,-1))
 
-    def test_rotating_by_half_pi_changes_direction_to_perpendicular(self):
+    def test_rotating_by_90_degrees_changes_direction_to_perpendicular(self):
         self.ship.rotate(-90)
         self.assertEqual(tuple(self.ship.direction), (0,1))
+
+    def test_firing_creates_plasma_with_same_direction(self):
+        plasma = self.ship.fire_plasma()
+        self.assertEqual(self.ship.direction, plasma.direction)

@@ -1,12 +1,16 @@
 import unittest
-import pygame
 from entities.space import Space
-from math import *
+from services.collision_handler import CollisionHandler
+from services.group_handler import GroupHandler
+from services.coordinate_system import CoordinateSystem
 
 
 class TestSpace(unittest.TestCase):
     def setUp(self):
-        self.space = Space(1.0)
+        collision_handler = CollisionHandler()
+        group_handler = GroupHandler()
+        coordinate_system = CoordinateSystem(640, 480)
+        self.space = Space(1.0, group_handler, collision_handler, coordinate_system)
 
     def test_space_has_ship(self):
         self.assertNotEqual(self.space.ship, None)
@@ -36,4 +40,4 @@ class TestSpace(unittest.TestCase):
 
     def test_firing_ship_cannon_adds_plasma_to_plasmas_group(self):
         self.space.fire_ship_cannon()
-        self.assertNotEqual(self.space.plasmas.sprites(), [])
+        self.assertNotEqual(self.space.group_handler.elements(self.space.plasmas), [])

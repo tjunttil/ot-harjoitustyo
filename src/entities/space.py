@@ -5,21 +5,24 @@ from entities.sprites.asteroid import Asteroid
 
 
 class Space:
-    def __init__(self, scale):
-        self.difficulty = 1
+    def __init__(self, scale, group_handler, collision_handler, coordinate_system):
+        self.difficulty = 3
         self.scale = scale
         self.ship = Ship((320*scale, 240*scale))
-        self.asteroids = pygame.sprite.Group()
-        self.plasmas = pygame.sprite.Group()
-        self.all_sprites = pygame.sprite.Group()
-        self.all_sprites.add(self.ship)
+        self.group_handler = group_handler
+        self.collision_handler = collision_handler
+        self.coordinate_system = coordinate_system
+        self.asteroids = self.group_handler.group()
+        self.plasmas = self.group_handler.group()
+        self.all_entities = self.group_handler.group()
+        self.add_entity(self.ship, self.all_entities)
 
     def add_entity(self,entity, group):
-        group.add(entity)
-        self.all_sprites.add(entity)
+        self.group_handler.add(entity, group)
+        self.group_handler.add(entity, self.all_entities)
 
     def move_objects(self):
-        for entity in self.all_sprites:
+        for entity in self.all_entities:
             entity.move()
 
     def fire_ship_cannon(self):
@@ -29,44 +32,15 @@ class Space:
     def change_ship_velocity(self, direction, change):
         self.ship.change_velocity(direction, change)
 
-    def check_ship_destruction(self):
-        for collide_point in self.ship.collide_points:
-            for asteroid in self.asteroids:
-                if pygame.Rect.collidepoint(asteroid.rect, tuple(collide_point)):
-                    return True
-        return False
-
-    def handle_plasma_hits(self):
-        # points = 0
-        # for a in self.asteroids:
-        #     pygame.sprite.sprite_collide(a, self.plasmas, True)
-        #     child_asteroids = a.fragment()
-        #     for child in child_asteroids:
-        #         self.add_sprite(child)
-        #     points += 1
-        # return points
-        return len(pygame.sprite.groupcollide(
-            self.plasmas, self.asteroids, True, True, collided = pygame.sprite.collide_circle))
-
-    def handle_asteroid_collision(self):
-        pass
-
     def handle_collisions(self):
-        return self.handle_plasma_hits(), self.check_ship_destruction()
+        plasma_hits = self.collision_handler.handle_plasma_hits(self.plasmas, self.asteroids)
+        ship_destruction = self.collision_handler.check_ship_destruction(self.ship, self.asteroids)
+        return plasma_hits, ship_destruction
         # self.handle_asteroid_collision()
-
-    def random_parameters(self, w, h):
-        # Creates a random position on the outer rim of space
-        # and a direction towards inner space
-        coordinates = choice([(randint(-w,self.scale*640 + w),choice([-h, self.scale*480 + h])),
-            (choice([-w, self.scale*640 + w]), randint(-h, self.scale*480))])
-        random_point = pygame.math.Vector2(randint(0,self.scale*640),randint(0,self.scale*480))
-        direction =  random_point - pygame.math.Vector2(coordinates)
-        normalized_direction = direction/pygame.math.Vector2.length(direction)
-        return coordinates, normalized_direction
 
     def create_asteroid(self):
         if randint(20*self.difficulty,500) == 100:
-            coordinates, direction = self.random_parameters(111,137)
+            coordinates = self.coordinate_system.random_coordinates(111,137)
+            direction = self.coordinate_system.random_direction(coordinates)
             asteroid = Asteroid(coordinates, direction, self.difficulty/3, 1)
             self.add_entity(asteroid, self.asteroids)

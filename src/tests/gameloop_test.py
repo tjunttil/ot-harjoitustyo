@@ -1,6 +1,9 @@
 import unittest
 from gameloop import GameLoop
 from entities.space import Space
+from services.collision_handler import CollisionHandler
+from services.group_handler import GroupHandler
+from services.coordinate_system import CoordinateSystem
 
 class StubRenderer:
     def draw(self):
@@ -24,7 +27,7 @@ class StubClock:
 class TestGameLoop(unittest.TestCase):
     def setUp(self):
         events = []
-        self.space = Space(1)
+        self.space = Space(1, GroupHandler(), CollisionHandler(), CoordinateSystem(640,480))
         self.gameloop = GameLoop(StubRenderer(), self.space,
         StubEventHandler(), StubEventQueue(events), StubClock())
 
