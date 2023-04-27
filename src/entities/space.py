@@ -4,42 +4,80 @@ from entities.sprites.asteroid import Asteroid
 
 
 class Space:
-    def __init__(self, group_handler, collision_handler, coordinate_system):
-        self.difficulty = 3
-        self.group_handler = group_handler
-        self.collision_handler = collision_handler
-        self.coordinate_system = coordinate_system
-        center = self.coordinate_system.center()
-        self.ship = Ship((center[0], center[1]))
-        self.asteroids = self.group_handler.group()
-        self.plasmas = self.group_handler.group()
-        self.all_entities = self.group_handler.group()
-        self.add_entity(self.ship, self.all_entities)
+    """A class to model the space that holds all entities
 
-    def add_entity(self,entity, group):
-        self.group_handler.add(entity, group)
-        self.group_handler.add(entity, self.all_entities)
+    Attributes:
+        group_handler: The GroupHandler object used to handle the entity-groups of the space
+        collision_handler: The CollisionHandler object used to check for entity collisions
+        coordinate_system: The coordinate system of the space
+        ship: The spaceship directed by the player, initially at the center of space
+        asteroids: A group of Asteroid objects, initially empty
+        plasmas: A group of Plasma objects, initially empty
+        all_entities: the group of all entities in the space, initialised to hold just the ship
+
+    """
+    def __init__(self, group_handler, collision_handler, coordinate_system):
+        """The class constructor
+
+        Args:
+            group_handler (GroupHandler): used to handle the entity-groups of the space
+            collision_handler (CollisionHandler): used to check for entity collisions
+            coordinate_system (CoordinateSystem): models coordinates and their transformations
+        """
+        self.__group_handler = group_handler
+        self.__collision_handler = collision_handler
+        self.__coordinate_system = coordinate_system
+        center = self.__coordinate_system.center()
+        self.__ship = Ship((center[0], center[1]))
+        self.__asteroids = self.__group_handler.group()
+        self.__plasmas = self.__group_handler.group()
+        self.__all_entities = self.__group_handler.group()
+        self.__add_entity(self.__ship, self.__all_entities)
+
+    def __add_entity(self,entity, group):
+        """Method to add an entity to a group and the all_entities group
+        using the group_handler
+
+        Args:
+            entity (Entity): the entity to be added
+            group (pygame.sprite.Group): the sprite group one wished to add the entity to
+        """
+        self.__group_handler.add(entity, group)
+        self.__group_handler.add(entity, self.__all_entities)
 
     def move_objects(self):
-        for entity in self.all_entities:
+        for entity in self.__all_entities:
             entity.move()
 
     def fire_ship_cannon(self):
-        plasma = self.ship.fire_plasma()
-        self.add_entity(plasma, self.plasmas)
+        plasma = self.__ship.fire_plasma()
+        self.__add_entity(plasma, self.__plasmas)
 
     def change_ship_velocity(self, direction, change):
-        self.ship.change_velocity(direction, change)
+        self.__ship.change_velocity(direction, change)
 
-    def handle_collisions(self):
-        plasma_hits = self.collision_handler.handle_plasma_hits(self.plasmas, self.asteroids)
-        ship_destruction = self.collision_handler.check_ship_destruction(self.ship, self.asteroids)
+    def check_collisions(self):
+        plasma_hits = self.__collision_handler.handle_plasma_hits(self.__plasmas, self.__asteroids)
+        ship_destruction = self.__collision_handler.check_ship_destruction(
+            self.__ship, self.__asteroids)
         return plasma_hits, ship_destruction
         # self.handle_asteroid_collision()
 
-    def create_asteroid(self):
-        if randint(20*self.difficulty,500) == 100:
-            coordinates = self.coordinate_system.random_coordinates(111,137)
-            direction = self.coordinate_system.random_direction(coordinates)
-            asteroid = Asteroid(coordinates, direction, self.difficulty/3, 1)
-            self.add_entity(asteroid, self.asteroids)
+    def create_asteroid(self, difficulty):
+        if randint(20*difficulty,500) == 100:
+            coordinates = self.__coordinate_system.random_coordinates(111,137)
+            direction = self.__coordinate_system.random_direction(coordinates)
+            asteroid = Asteroid(coordinates, direction, difficulty/3, 1)
+            self.__add_entity(asteroid, self.__asteroids)
+
+    @property
+    def ship(self):
+        return self.__ship
+
+    @property
+    def plasmas(self):
+        return self.__plasmas
+
+    @property
+    def all_entities(self):
+        return self.__all_entities

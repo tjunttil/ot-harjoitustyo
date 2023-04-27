@@ -1,5 +1,6 @@
 class GameLoop:
     def __init__(self, renderer, space, event_handler, event_queue, clock):
+        self.__difficulty = 3
         self.__renderer = renderer
         self.__event_handler = event_handler
         self.__event_queue = event_queue
@@ -27,9 +28,9 @@ class GameLoop:
         return True
 
     def __update_space(self):
-        self.__space.create_asteroid()
+        self.__space.create_asteroid(self.__difficulty)
         self.__space.move_objects()
-        plasma_hits, ship_destruction = self.__space.handle_collisions()
+        plasma_hits, ship_destruction = self.__space.check_collisions()
         if ship_destruction:
             self.__game_over = True
         self.__points += plasma_hits
