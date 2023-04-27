@@ -10,7 +10,7 @@ class TestSpace(unittest.TestCase):
         collision_handler = CollisionHandler()
         group_handler = GroupHandler()
         coordinate_system = CoordinateSystem(640, 480)
-        self.space = Space(1.0, group_handler, collision_handler, coordinate_system)
+        self.space = Space(group_handler, collision_handler, coordinate_system)
 
     def test_space_has_ship(self):
         self.assertNotEqual(self.space.ship, None)

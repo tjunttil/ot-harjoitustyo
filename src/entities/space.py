@@ -1,17 +1,16 @@
-from random import randint, choice
-import pygame
+from random import randint
 from entities.sprites.ship import Ship
 from entities.sprites.asteroid import Asteroid
 
 
 class Space:
-    def __init__(self, scale, group_handler, collision_handler, coordinate_system):
+    def __init__(self, group_handler, collision_handler, coordinate_system):
         self.difficulty = 3
-        self.scale = scale
-        self.ship = Ship((320*scale, 240*scale))
         self.group_handler = group_handler
         self.collision_handler = collision_handler
         self.coordinate_system = coordinate_system
+        center = self.coordinate_system.center()
+        self.ship = Ship((center[0], center[1]))
         self.asteroids = self.group_handler.group()
         self.plasmas = self.group_handler.group()
         self.all_entities = self.group_handler.group()

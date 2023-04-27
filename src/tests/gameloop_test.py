@@ -27,7 +27,7 @@ class StubClock:
 class TestGameLoop(unittest.TestCase):
     def setUp(self):
         events = []
-        self.space = Space(1, GroupHandler(), CollisionHandler(), CoordinateSystem(640,480))
+        self.space = Space(GroupHandler(), CollisionHandler(), CoordinateSystem(640,480))
         self.gameloop = GameLoop(StubRenderer(), self.space,
         StubEventHandler(), StubEventQueue(events), StubClock())
 

@@ -15,8 +15,8 @@ class CoordinateSystem:
             width (int): the width of the coordinate system
             height (int): the height of the coordinate system
         """
-        self.width = width
-        self.height = height
+        self.__width = width
+        self.__height = height
 
     def vector(self,x_coordinate,y_coordinate):
         """Produces a pygame.math.Vector2 object with the given coordinates
@@ -53,10 +53,10 @@ class CoordinateSystem:
             pygame.math.Vector2: first element corresponds to a random x-coordinate
             and the second to a random y-coordinate
         """
-        random_x = randint(int(-self.width - object_width/2), int(self.width + object_width/2))
-        random_y = randint(int(-self.height - object_height/2), int(self.height + object_height/2))
+        random_x = randint(int(-self.__width - object_width/2), int(self.__width + object_width/2))
+        random_y = randint(int(-self.__height - object_height/2), int(self.__height + object_height/2))
         coordinates = [random_x, random_y]
-        max_coordinates = [self.width + object_width/2, self.height + object_height/2]
+        max_coordinates = [self.__width + object_width/2, self.__height + object_height/2]
         max_index = choice([0,1])
         max_sign = choice([-1, 1])
         coordinates[max_index] = max_coordinates[max_index]*max_sign
@@ -72,7 +72,10 @@ class CoordinateSystem:
         Returns:
             pygame.math.Vector2: the direction vector of length 1 towards the interior
         """
-        random_point = self.vector(randint(0,self.width),randint(0,self.height))
+        random_point = self.vector(randint(0,self.__width),randint(0,self.__height))
         direction =  random_point - coordinates
         normalized_direction = direction/self.length(direction)
         return normalized_direction
+
+    def center(self):
+        return self.vector(self.__width/2, self.__height/2)

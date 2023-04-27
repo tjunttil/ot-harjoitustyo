@@ -20,7 +20,7 @@ class UI:
         collision_handler = CollisionHandler()
         group_handler = GroupHandler()
         coordinate_system = CoordinateSystem(640,480)
-        space = Space(1, group_handler, collision_handler, coordinate_system)
+        space = Space(group_handler, collision_handler, coordinate_system)
         renderer = Renderer(self.display, space)
         game = GameLoop(renderer, space, self.event_handler, self.event_queue, self.clock)
         pygame.init()
