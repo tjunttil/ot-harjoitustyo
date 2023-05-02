@@ -39,3 +39,11 @@ joita Space-olio voi kutsua.
   - Luotu erillinen UI-luokka joka alustaa ja käynnistää käyttöliittymän.
 - Testattu että gameloop aiheuttaa oikeat muutokset kun käskyinä tulee pelin lopettaminen tai aluksen nopeuden muutos.
 - Testattu että plasman ampuminen lisää plasman Space-luokan plasmas-ryhmään, ja että tuotetun plasman suunta on sama kuin aluksen.
+
+
+## Viikko 6
+
+- Luotu aloitusnäkymä-toiminnallisuus tekemällä tarvittavat metodit renderer-, event_handler- ja ui-luokkiin
+- Luotu yläluokka ui_service joka hoitaa event_handler- ja renderer-luokille yhteisten muuttujien alustuksen ja päivittämisen
+- Testattu että GroupHandler palauttaa tyhjän ryhmän kun kutsutaan group-metodia, että elements-metodi palauttaa tyhjän listan tyhjälle ryhmälle ja lisätyt elementit sisältävän listan kun ryhmään on lisätty elementtejä, ja että add-metodi lisää elementin ryhmään
+- Testattu että CollisionHandlerin handle_plasma_hits-metodi palauttaa ryhmiin lisättyjen yhteentörmäävien plasmojen ja asteroidien määrän
