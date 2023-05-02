@@ -13,13 +13,15 @@ class StubEventHandler:
     def handle_event(self, event):
         pass
 
+    def handle_events(self):
+        pass
+
 class StubClock:
     def tick(self):
         pass
 
 class TestGameLoop(unittest.TestCase):
     def setUp(self):
-        events = []
         self.space = Space(GroupHandler(), CollisionHandler(), CoordinateSystem(640,480))
         self.gameloop = GameLoop(StubRenderer(), self.space,
         StubEventHandler(), StubClock())
