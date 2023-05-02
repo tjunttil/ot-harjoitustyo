@@ -1,5 +1,5 @@
 import unittest
-from entities.space import Space
+from services.space import Space
 from services.collision_handler import CollisionHandler
 from services.group_handler import GroupHandler
 from services.coordinate_system import CoordinateSystem
@@ -18,14 +18,6 @@ class TestSpace(unittest.TestCase):
     def test_spaceship_is_in_starting_position(self):
         self.assertEqual(
             (self.space.ship.pos[0], self.space.ship.pos[1]), (320, 240))
-
-    # def test_add_entity_adds_it_to_all_sprites(self):
-    #     entity = Entity((0,0), )
-    #     self.space.add_sprite(sprite, self.space.plasmas)
-    #     new_group = pygame.sprite.Group()
-    #     for sprite in [self.space.ship, sprite]:
-    #         new_group.add(sprite)
-    #     self.assertEqual(self.space.all_sprites, new_group)
 
     def test_changed_velocity_changes_ship_position_with_move_ship(self):
         self.space.change_ship_velocity((1, 0), 1)

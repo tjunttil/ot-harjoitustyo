@@ -1,15 +1,15 @@
 import pygame
+from .ui_service import UIService
 
-class Renderer:
+class Renderer(UIService):
     """Class to render objects in space to pygame display
 
     Attributes:
         display: the display to render to
     """
     def __init__(self, display):
+        super().__init__()
         self.__display = display
-        self.__game_view = False
-        self.__menu_view = True
 
     def draw_game_view(self, points, space, game_over):
         self.__display.fill((0, 0, 0))
@@ -38,20 +38,23 @@ class Renderer:
         self.__display.blit(title_text, title_rect)
         self.__display.blit(start_new_game_text, start_rect)
 
-    def draw(self, points = 0, space = None, game_over = False):
+    def menu_operation(self):
+        self.draw_menu_view()
+
+    def game_operation(self, data_struct):
+        self.draw_game_view(data_struct[0], data_struct[1], data_struct[2])
+
+    def initialisation(self):
         self.__display.fill((0,0,0))
-        if self.__game_view:
-            self.draw_game_view(points, space, game_over)
-        if self.__menu_view:
-            self.draw_menu_view()
+
+    def finalisation(self):
         pygame.display.update()
 
-    @property
-    def game_view(self):
-        return self.__game_view
-
-    @game_view.setter
-    def game_view(self, value):
-        if isinstance(value, bool):
-            self.__game_view = value
-            self.__menu_view = not value
+    def draw(self, points = 0, space = None, game_over = False):
+        self.__display.fill((0,0,0))
+        if self.game_view:
+            self.draw_game_view(points, space, game_over)
+        if self.menu_view:
+            self.draw_menu_view()
+        pygame.display.update()
+        #super().operation((points, space, game_over))

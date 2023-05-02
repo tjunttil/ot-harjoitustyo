@@ -1,6 +1,6 @@
 import unittest
-from gameloop import GameLoop
-from entities.space import Space
+from services.gameloop import GameLoop
+from services.space import Space
 from services.collision_handler import CollisionHandler
 from services.group_handler import GroupHandler
 from services.coordinate_system import CoordinateSystem
@@ -13,13 +13,6 @@ class StubEventHandler:
     def handle_event(self, event):
         pass
 
-class StubEventQueue:
-    def __init__(self, events):
-        self.events = events
-
-    def get(self):
-        return self.events
-
 class StubClock:
     def tick(self):
         pass
@@ -29,7 +22,7 @@ class TestGameLoop(unittest.TestCase):
         events = []
         self.space = Space(GroupHandler(), CollisionHandler(), CoordinateSystem(640,480))
         self.gameloop = GameLoop(StubRenderer(), self.space,
-        StubEventHandler(), StubEventQueue(events), StubClock())
+        StubEventHandler(), StubClock())
 
     def test_handle_commands_returns_false_when_quitting(self):
         commands = {"quit": True}

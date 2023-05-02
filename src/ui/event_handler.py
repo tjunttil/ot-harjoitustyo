@@ -1,6 +1,7 @@
 import pygame
+from .ui_service import UIService
 
-class EventHandler:
+class EventHandler(UIService):
     """A class for handling pygame events in the main gameloop
 
     Attributes:
@@ -18,9 +19,8 @@ class EventHandler:
             event_queue (EventQueue): the event queue for the pygame instance
 
         """
+        super().__init__()
         self.__event_queue = event_queue
-        self.__menu_view = True
-        self.__game_view = False
 
     def __handle_movement(self, event):
         """A method for handling events leading to movement
@@ -121,9 +121,9 @@ class EventHandler:
         """
         commands = {}
         commands["quit"] = self.__handle_quitting(event)
-        if self.__game_view:
+        if self.game_view:
             commands = dict(**(self.__handle_game_event(event)), **commands)
-        if self.__menu_view:
+        if self.menu_view:
             commands = dict(**(self.__handle_menu_event(event)), **commands)
         return commands
 
@@ -133,14 +133,4 @@ class EventHandler:
         for event in events:
             commands_list.append(self.handle_event(event))
         return commands_list
-
-    @property
-    def game_view(self):
-        return self.__game_view
-
-    @game_view.setter
-    def game_view(self, value):
-        if isinstance(value, bool):
-            self.__game_view = value
-            self.__menu_view = not value
    

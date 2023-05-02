@@ -18,14 +18,6 @@ class GameLoop:
             self.__space.fire_ship_cannon()
         return True
 
-    # def __handle_events(self):
-    #     events = self.__event_queue.get()
-    #     for event in events:
-    #         commands = self.__event_handler.handle_event(event)
-    #         if not self.__handle_commands(commands):
-    #             return False
-    #     return True
-
     def __update_space(self):
         self.__space.create_asteroid(self.__difficulty)
         self.__space.move_objects()
@@ -38,8 +30,7 @@ class GameLoop:
         running = True
         while running:
             for commands in self.__event_handler.handle_events():
-                if not self.__handle_commands(commands):
-                    running = False
+                running = self.__handle_commands(commands)
             if not self.__game_over:
                 self.__update_space()
             self.__renderer.draw(self.__points, self.__space, self.__game_over)

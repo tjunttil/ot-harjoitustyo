@@ -72,3 +72,4 @@ class Ship(Entity):
 
     def return_tip(self):
         tip_location_vector = self.calculate_collide_points()[0]
+        return tip_location_vector

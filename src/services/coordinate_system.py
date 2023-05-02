@@ -54,7 +54,8 @@ class CoordinateSystem:
             and the second to a random y-coordinate
         """
         random_x = randint(int(-self.__width - object_width/2), int(self.__width + object_width/2))
-        random_y = randint(int(-self.__height - object_height/2), int(self.__height + object_height/2))
+        random_y = randint(int(-self.__height - object_height/2),
+        int(self.__height + object_height/2))
         coordinates = [random_x, random_y]
         max_coordinates = [self.__width + object_width/2, self.__height + object_height/2]
         max_index = choice([0,1])

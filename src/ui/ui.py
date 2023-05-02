@@ -1,6 +1,7 @@
 import pygame
-from entities.space import Space
-from gameloop import GameLoop
+from services.space import Space
+from services.gameloop import GameLoop
+#from services.menuloop import MenuLoop
 from services.collision_handler import CollisionHandler
 from services.group_handler import GroupHandler
 from services.coordinate_system import CoordinateSystem
@@ -16,6 +17,7 @@ class UI:
         self.__event_handler = EventHandler(self.__event_queue)
         self.__clock = Clock()
         self.__renderer = Renderer(self.__display)
+        pygame.init()
 
     def toggle_game_view(self):
         services = [self.__event_handler, self.__renderer]
@@ -23,24 +25,22 @@ class UI:
             service.game_view = not service.game_view
 
     def start_menu(self):
-        pygame.display.set_caption("Asteroids")
-        pygame.init()
+        #menu = MenuLoop(self.__renderer, self.__event_handler, self.__clock)
+        #menu.start()
         running = True
+        self.__renderer.draw()
         while running:
-            #commands_list = [{"quit": False, "start game": True}]
             commands_list = self.__event_handler.handle_events()
-            #print(commands_list)
             for commands in commands_list:
-                #print(commands)
                 running = not commands["quit"]
                 if commands["start game"]:
                     self.toggle_game_view()
                     self.start_game()
                     self.toggle_game_view()
+                    running = False
                 #if commands["score list"]:
                 #    pass
                     #self.start_score_view()
-            self.__renderer.draw()
             self.__clock.tick(60)
 
     def start_game(self):
@@ -50,3 +50,7 @@ class UI:
         space = Space(group_handler, collision_handler, coordinate_system)
         game = GameLoop(self.__renderer, space, self.__event_handler, self.__clock)
         game.start()
+
+    def start(self):
+        pygame.display.set_caption("Asteroids")
+        self.start_menu()
