@@ -13,6 +13,7 @@ sijoituslistaukset.
 
 ### Ennen pelin aloitusta
 
+- Käyttäjä voi aloittaa uuden pelin painamalla Enteriä (tehty)
 - Käyttäjä voi valita haluaako hän tarkastella tuloslistoja vai aloittaa uuden 
 pelin
 
