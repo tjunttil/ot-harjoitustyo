@@ -1,9 +1,8 @@
 class GameLoop:
-    def __init__(self, renderer, space, event_handler, event_queue, clock):
+    def __init__(self, renderer, space, event_handler, clock):
         self.__difficulty = 3
         self.__renderer = renderer
         self.__event_handler = event_handler
-        self.__event_queue = event_queue
         self.__clock = clock
         self.__space = space
         self.__points = 0
@@ -19,13 +18,13 @@ class GameLoop:
             self.__space.fire_ship_cannon()
         return True
 
-    def __handle_events(self):
-        events = self.__event_queue.get()
-        for event in events:
-            commands = self.__event_handler.handle_event(event)
-            if not self.__handle_commands(commands):
-                return False
-        return True
+    # def __handle_events(self):
+    #     events = self.__event_queue.get()
+    #     for event in events:
+    #         commands = self.__event_handler.handle_event(event)
+    #         if not self.__handle_commands(commands):
+    #             return False
+    #     return True
 
     def __update_space(self):
         self.__space.create_asteroid(self.__difficulty)
@@ -36,10 +35,12 @@ class GameLoop:
         self.__points += plasma_hits
 
     def start(self):
-        while True:
-            if not self.__handle_events():
-                break
+        running = True
+        while running:
+            for commands in self.__event_handler.handle_events():
+                if not self.__handle_commands(commands):
+                    running = False
             if not self.__game_over:
                 self.__update_space()
-            self.__renderer.draw(self.__points, self.__game_over)
+            self.__renderer.draw(self.__points, self.__space, self.__game_over)
             self.__clock.tick(60)

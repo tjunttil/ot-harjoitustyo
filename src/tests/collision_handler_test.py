@@ -2,6 +2,7 @@ import unittest
 import pygame
 from services.collision_handler import CollisionHandler
 from entities.sprites.asteroid import Asteroid
+from entities.sprites.plasma import Plasma
 from entities.sprites.ship import Ship
 
 class TestCollisionHandler(unittest.TestCase):
@@ -26,4 +27,19 @@ class TestCollisionHandler(unittest.TestCase):
         plasma_hits = self.collision_handler.handle_plasma_hits(self.plasmas, self.asteroids)
         self.assertEqual(plasma_hits, 0)
 
-
+    def test_handle_plasma_hits_returns_number_of_plasma_hits_when_superimposed(self):
+        hits = []
+        test_positions = []
+        start = pygame.math.Vector2((10,10))
+        shift = pygame.math.Vector2((50,0))
+        previous = start
+        for i in range(10):
+            shift = (i+1)*shift.rotate(-90)
+            new = previous + shift
+            test_positions.append(new)
+            previous = new
+        for position in test_positions:
+            self.asteroids.add(Asteroid(position, 1,1,1))
+            self.plasmas.add(Plasma(position,shift))
+        hits = self.collision_handler.handle_plasma_hits(self.plasmas, self.asteroids)
+        self.assertEqual(hits, 10)

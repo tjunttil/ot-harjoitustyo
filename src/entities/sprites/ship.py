@@ -3,7 +3,26 @@ from .entity import Entity
 from .plasma import Plasma
 
 class Ship(Entity):
+    """A class for representing ship state and changes to it.
+
+    Args:
+        Entity (pygame.sprite.Sprite): a parent class for state and methods
+        common to all entities.
+
+    Attributes:
+        parent class attributes
+        original_image (pygame.image): the original image of the ship
+        angle (float): the angle of the ship relative to the x-axis
+        angular_velocity (float): the angular velocity of the ship
+        collide_points: the points delimiting the actual ship shape 
+        inside the image
+    """
     def __init__(self, coordinates):
+        """The constructor method for the class
+
+        Args:
+            coordinates (tuple): the starting coordinates for the ship center
+        """
         super().__init__(coordinates, pygame.math.Vector2(1,0), 0)
         super().load_image("ship.png")
         self.original_image = self.image
@@ -50,3 +69,6 @@ class Ship(Entity):
         angle = self.angle
         self.rotate(angle)
         super().move()
+
+    def return_tip(self):
+        tip_location_vector = self.calculate_collide_points()[0]
