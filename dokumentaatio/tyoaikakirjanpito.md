@@ -10,4 +10,6 @@
 | 18.4. | 1    | uuden toiminnallisuuden lisäämistä, testien korjailua |
 | 24.4. | 2.5  | refaktorointia, testien kirjoittamista |
 | 25.4. | 2.5  | uuden toiminnallisuuden lisäämistä, refaktorointia, testien kirjoittamista |
-| yht   | 11.5  | |
+| 27.4. | 0.5  | refaktorointia, työn rakenteen pohtimista, testien kirjoittamista |
+| 1.5.  | 1    | uuden toiminnallisuuden lisäämistä, refaktorointia
+| yht   | 13   | |
