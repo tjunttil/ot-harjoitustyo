@@ -1,0 +1,29 @@
+class Loop:
+    def __init__(self, renderer, event_handler, clock):
+        self.__renderer = renderer
+        self.__event_handler = event_handler
+        self.__clock = clock
+
+    def _handle_commands(self, commands):
+        return not commands["quit"]
+
+    def _get_rendering_params(self):
+        return []
+
+    def _finalisation(self):
+        pass
+
+    def start(self):
+        running = True
+        while running:
+            commands_list = self.__event_handler.handle_events()
+            for commands in commands_list:
+                return_value = self._handle_commands(commands)
+                if isinstance(return_value, bool):
+                    running = return_value
+                else:
+                    return return_value
+            self._finalisation()
+            self.__renderer.draw(*self._get_rendering_params())
+            self.__clock.tick(60)
+        return False

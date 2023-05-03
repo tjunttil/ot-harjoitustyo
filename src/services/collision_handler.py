@@ -32,16 +32,17 @@ class CollisionHandler:
         Returns:
             Int: the number of collisions of Plasma and Asteroid objects
         """
-        # points = 0
-        # for a in self.asteroids:
-        #     pygame.sprite.sprite_collide(a, self.plasmas, True)
+        points = 0
+        for asteroid in asteroids:
+            if len(pygame.sprite.spritecollide(asteroid, plasmas, True)) > 0:
+                asteroid.get_hit()
+                if asteroid.hits > 2:
+                    points += 1
+                    asteroid.kill()
         #     child_asteroids = a.fragment()
         #     for child in child_asteroids:
-        #         self.add_sprite(child)
-        #     points += 1
-        # return points
-        return len(pygame.sprite.groupcollide(
-            plasmas, asteroids, True, True, collided = pygame.sprite.collide_circle))
+        #         self.add_sprite(child)        
+        return points
 
     def handle_asteroid_collision(self):
         pass

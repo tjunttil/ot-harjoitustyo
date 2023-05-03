@@ -57,10 +57,11 @@ class Space:
         self.__ship.change_velocity(direction, change)
 
     def check_collisions(self):
-        plasma_hits = self.__collision_handler.handle_plasma_hits(self.__plasmas, self.__asteroids)
+        asteroid_destructions = self.__collision_handler.handle_plasma_hits(self.__plasmas,
+        self.__asteroids)
         ship_destruction = self.__collision_handler.check_ship_destruction(
             self.__ship, self.__asteroids)
-        return plasma_hits, ship_destruction
+        return asteroid_destructions, ship_destruction
         # self.handle_asteroid_collision()
 
     def create_asteroid(self, difficulty):

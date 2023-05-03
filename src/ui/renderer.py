@@ -38,18 +38,6 @@ class Renderer(UIService):
         self.__display.blit(title_text, title_rect)
         self.__display.blit(start_new_game_text, start_rect)
 
-    def menu_operation(self):
-        self.draw_menu_view()
-
-    def game_operation(self, data_struct):
-        self.draw_game_view(data_struct[0], data_struct[1], data_struct[2])
-
-    def initialisation(self):
-        self.__display.fill((0,0,0))
-
-    def finalisation(self):
-        pygame.display.update()
-
     def draw(self, points = 0, space = None, game_over = False):
         self.__display.fill((0,0,0))
         if self.game_view:
@@ -57,4 +45,3 @@ class Renderer(UIService):
         if self.menu_view:
             self.draw_menu_view()
         pygame.display.update()
-        #super().operation((points, space, game_over))
