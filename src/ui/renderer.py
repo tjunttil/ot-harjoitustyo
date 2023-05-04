@@ -11,24 +11,23 @@ class Renderer(UIService):
         super().__init__()
         self.__display = display
 
-    def draw_game_view(self, points, space, game_over):
-        self.__display.fill((0, 0, 0))
+    def draw_game_view(self, points, space):
         space.all_entities.draw(self.__display)
-        if not game_over:
-            font = pygame.font.SysFont("Arial", 20)
-            point_text = font.render(f"Points: {points}", True, (255,255,255))
-            self.__display.blit(point_text, (0,0))
-        else:
-            font = pygame.font.SysFont("Arial", 40)
-            game_over_text = font.render("GAME OVER", True, (255, 0, 0))
-            points_text = font.render(f"POINTS: {points}", True, (255, 0, 0))
-            game_over_rect = game_over_text.get_rect(center = (320, 200))
-            points_rect = points_text.get_rect(center = (320, 240))
-            self.__display.blit(game_over_text, game_over_rect)
-            self.__display.blit(points_text, points_rect)
+        font = pygame.font.SysFont("Arial", 20)
+        point_text = font.render(f"Points: {points}", True, (255,255,255))
+        self.__display.blit(point_text, (0,0))
+
+    def draw_game_over_view(self, points, space):
+        space.all_entities.draw(self.__display)
+        font = pygame.font.SysFont("Arial", 40)
+        game_over_text = font.render("GAME OVER", True, (255, 0, 0))
+        points_text = font.render(f"POINTS: {points}", True, (255, 0, 0))
+        game_over_rect = game_over_text.get_rect(center = (320, 200))
+        points_rect = points_text.get_rect(center = (320, 240))
+        self.__display.blit(game_over_text, game_over_rect)
+        self.__display.blit(points_text, points_rect)
 
     def draw_menu_view(self):
-        self.__display.fill((0,0,0))
         title_font = pygame.font.SysFont("Arial", 60)
         title_text = title_font.render("ASTEROIDS", True, (255, 255, 255))
         item_font = pygame.font.SysFont("Arial", 35)
@@ -38,10 +37,12 @@ class Renderer(UIService):
         self.__display.blit(title_text, title_rect)
         self.__display.blit(start_new_game_text, start_rect)
 
-    def draw(self, points = 0, space = None, game_over = False):
+    def draw(self, points = 0, space = None):
         self.__display.fill((0,0,0))
         if self.game_view:
-            self.draw_game_view(points, space, game_over)
+            self.draw_game_view(points, space)
+        if self.game_over_view:
+            self.draw_game_over_view(points, space)
         if self.menu_view:
             self.draw_menu_view()
         pygame.display.update()

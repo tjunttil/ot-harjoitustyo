@@ -115,16 +115,23 @@ class EventHandler(UIService):
         commands["fire"] = self.__handle_firing(event)
         return commands
 
+    def __handle_game_over_event(self, event):
+        commands = {}
+        return commands
+
     def handle_event(self, event):
         """A general-purpose method for handling any event, calls the 
         specific event -handling subroutines based on the view
         """
+        view_handlers = [(self.game_view, self.__handle_game_event),
+        (self.menu_view, self.__handle_menu_event),
+        (self.game_over_view, self.__handle_game_over_event)]
         commands = {}
         commands["quit"] = self.__handle_quitting(event)
-        if self.game_view:
-            commands = dict(**(self.__handle_game_event(event)), **commands)
-        if self.menu_view:
-            commands = dict(**(self.__handle_menu_event(event)), **commands)
+        for view_handler in view_handlers:
+            view, handler = view_handler
+            if view:
+                commands = {**(handler(event)), **commands}
         return commands
 
     def handle_events(self):

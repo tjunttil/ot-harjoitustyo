@@ -5,14 +5,12 @@ class GameLoop(Loop):
         self.__difficulty = 3
         self.__space = space
         self.__points = 0
-        self.__game_over = False
 
     def _get_rendering_params(self):
-        return (self.__points, self.__space, self.__game_over)
+        return (self.__points, self.__space)
 
-    def _finalisation(self):
-        if not self.__game_over:
-            self.__update_space()
+    def _logic_call(self):
+        return self.__update_space()
 
     def _handle_commands(self, commands):
         movement = commands["move"]
@@ -27,14 +25,6 @@ class GameLoop(Loop):
         self.__space.move_objects()
         plasma_hits, ship_destruction = self.__space.check_collisions()
         if ship_destruction:
-            self.__game_over = True
+            return "game over"
         self.__points += plasma_hits
-
-    # def start(self):
-    #     running = True
-    #     while running:
-    #         for commands in self.__event_handler.handle_events():
-    #             running = self.__handle_commands(commands)
-    #         self.__renderer.draw(self.__points, self.__space, self.__game_over)
-    #         self.__clock.tick(60)
-    #     return False
+        return True
