@@ -7,7 +7,7 @@ class GameLoop(Loop):
         self.__points = 0
 
     def _get_rendering_params(self):
-        return (self.__points, self.__space)
+        return [self.__points, self.__space]
 
     def _logic_call(self):
         return self.__update_space()

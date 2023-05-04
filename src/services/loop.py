@@ -23,10 +23,11 @@ class Loop:
                 if isinstance(return_value, bool):
                     running = return_value
                 else:
-                    return return_value
+                    return [return_value]
             view = self._logic_call()
+            params = self._get_rendering_params()
             if not isinstance(view, bool):
-                return view
-            self.__renderer.draw(*self._get_rendering_params())
+                return [view] + params
+            self.__renderer.draw(*params)
             self.__clock.tick(60)
-        return False
+        return [False]
