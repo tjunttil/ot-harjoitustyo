@@ -6,12 +6,13 @@ class TestEntity(unittest.TestCase):
     def setUp(self):
         self.nullvector = pygame.math.Vector2(0,0)
         self.entity = Entity(self.nullvector,self.nullvector, 0)
-           
+
     def test_entity_is_not_none(self):
         self.assertNotEqual(self.entity, None)
 
     def test_starting_values_are_correct(self):
-        self.assertEqual((self.entity.pos, self.entity.direction, self.entity.velocity), (self.nullvector, self.nullvector, 0))
+        self.assertEqual((self.entity.pos, self.entity.direction,
+        self.entity.velocity), (self.nullvector, self.nullvector, 0))
 
     def test_update_position_does_nothing_if_velocity_zero(self):
         self.entity.update_position()
