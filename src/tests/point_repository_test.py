@@ -5,26 +5,31 @@ from build import build
 
 class TestPointRepository(unittest.TestCase):
     def setUp(self):
+        build()
         self.point_repository = PointRepository()
-        self.time = datetime.now()
-        self.points_a = ("user_a", 12)
-        self.points_b = ("user_b", 34)
+        self.time = datetime.now().strftime("%d.%m.%Y")
+        self.points_a = ("user_a", 12, self.time)
+        self.points_b = ("user_b", 34, self.time)
 
     def test_file_is_empty_after_build(self):
-        build()
         self.assertEqual(len(self.point_repository.points_list()),
         0)
 
     def test_add(self):
         self.point_repository.add(self.points_a[0], self.points_a[1])
         points = self.point_repository.points_list()
-        self.assertEqual(((points[0])[0], (points[0])[1], (points[0])[2]),
+        entry = points[0]
+        self.assertEqual((entry[0], entry[1], entry[2]),
         self.points_a)
 
     def test_points_list(self):
-        point_entries = [self.points_a, self.points_b]
+        point_entries = [self.points_b, self.points_a]
         for entry in point_entries:
             self.point_repository.add(entry[0], entry[1])
-        entries = list(map(lambda x,y: (x,y, self.time.strftime("%d.%m.%Y")),point_entries))
-        self.assertEqual(self.point_repository.points_list(), entries)
-        
+        #entries = list(map(lambda x: (x[0],(x[1], self.time.strftime("%d.%m.%Y"))),point_entries))
+        self.assertEqual(self.point_repository.points_list(), point_entries)
+
+        for i in range(15):
+            self.point_repository.add(self.points_a[0], self.points_a[1])
+        self.assertEqual(len(self.point_repository.points_list()), 10)
+       

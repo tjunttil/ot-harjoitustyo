@@ -14,7 +14,6 @@ class Loop:
         return True
 
     def start(self):
-        print("starting loop")
         running = True
         while running:
             commands_list = self.__event_handler.handle_events()

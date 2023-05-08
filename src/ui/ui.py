@@ -33,7 +33,6 @@ class UI:
 
     def __start_menu(self):
         menu = MenuLoop(self.__renderer, self.__event_handler, self.__clock)
-        print("starting menu loop")
         return menu.start()
 
     def __start_game(self):
@@ -42,34 +41,25 @@ class UI:
         coordinate_system = CoordinateSystem(640,480)
         space = Space(group_handler, collision_handler, coordinate_system)
         game = GameLoop(self.__renderer, space, self.__event_handler, self.__clock)
-        print("starting game loop")
         return game.start()
 
     def __start_game_over(self, points, space):
-        print("starting game over loop")
         game_over = GameOverLoop(self.__renderer, self.__event_handler, self.__clock, points, space)
         return game_over.start()
 
     def start(self, view, *args):
-        print("starting...")
         starters = [("game", self.__start_game), ("menu", self.__start_menu),
         ("game over", self.__start_game_over)]
         if isinstance(view, bool) and not view:
-            print("goodbye!")
             return
-        print(f"the variable view is: {view}")
         for starter in starters:
             key, value = starter
-            print(f"{key}:{value}")
             if view == key:
-                print(f"current view:{view}")
                 self.switch_view(view)
-                print(f"starting {view}")
                 params = value(*args)
                 rest = []
                 if len(params) > 1:
                     rest = params[1:]
                 view = params[0]
-                print(f"switching now to {view}")
                 self.start(view, *rest)
                 break
