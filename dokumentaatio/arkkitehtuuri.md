@@ -5,7 +5,7 @@ Koodin rakenne on jakautunut hakemistotasolla seuraavasti: services-kansio sisä
 
 
 ## Käyttöliittymä
-Käyttöliittymä koostuu tällä hetkellä kahdesta pääasiallisesta näkymästä, aloitusnäyttönäkymästä ja pelinäkymästä. Aloitusnäkymä ja pelinäkymä on toteutettu EventHandler- ja Renderer-luokkien näille näkymille eriytetyillä metodeilla. Pelinäkymän logiikalle on oma luokkansa, GameLoop, jota UI-luokka ainoastaan kutsuu, mutta toistaiseksi aloitusnäkymän logiikka sisältyy UI-luokkaan.
+Käyttöliittymä koostuu tällä hetkellä kolmesta pääasiallisesta näkymästä, aloitusnäyttönäkymästä, pelinäkymästä ja lopetusnäkymästä. Näkymät on toteutettu EventHandler- ja Renderer-luokkien näille eriytetyillä metodeilla. Kunkin näkymän logiikalle on oma silmukkaluokkansa, joka perii Loop-luokan, ja UI-luokka ainoastaan kutsuu näiden silmukoiden aloitusmetodeita aiemman silmukan palautusarvon perusteella.
 
 
 ## Sovelluslogiikka
