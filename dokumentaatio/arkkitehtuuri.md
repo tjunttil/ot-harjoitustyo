@@ -42,3 +42,101 @@ Pelilogiikka koostuu Space objektin sisältämien Ship-, Plasma-, ja Asteroid-en
 ```
 
 Pelin korkeamman tason toiminnallisuus on toteutettu enimmäkseen luokan GameLoop kautta. GameLoop pyörittää pelisilmukkaa, kutsuen silmukan jokaisella kierroksella ui-kansion objektien metodeja hakeakseen käyttäjän syötteitä ja piirtääkseen pelinäkymän näytölle, ja näiden välissä kutsuu sille syötetyn Space-objektin metodeja päivittääkseen pelitilaa syötteiden mukaisesti. 
+
+## Päätoiminnallisuudet
+
+Seuraavassa pelin päätoiminnallisuuksia on kuvattu sekvenssikaavioin.
+
+### Aluksen liikuttaminen eteenpäin
+
+```mermaid
+
+sequenceDiagram
+  
+    User ->> EventQueue: press up arrow
+     
+    EventHandler ->> EventQueue: get()
+    
+    activate EventQueue
+    
+    EventQueue -->> EventHandler: [pygame.event]
+    
+    deactivate EventQueue
+    
+    GameLoop ->> EventHandler: handle_events()
+    
+    activate EventHandler
+    
+    EventHandler ->> EventHandler: handle_event()
+    
+    EventHandler ->> EventHandler: handle_movement()
+    
+    EventHandler ->> GameLoop: commands (includes "move": ((1,0),5))
+    
+    deactivate EventHandler
+    
+    GameLoop ->> Space: change_ship_velocity((1,0),5)
+    
+    activate Space
+    
+    Space ->> Ship: change_velocity((1,0),5)
+    
+    activate Ship
+    
+    Ship -->> Space: 
+    
+    deactivate Ship
+    
+    Space -->> GameLoop: 
+    
+    deactivate Space
+    
+    
+```
+
+## Pisteiden tallentaminen
+
+```mermaid
+
+sequenceDiagram
+
+    activate GameOverLoop
+  
+    User ->> EventQueue: enter username and press Return
+     
+    EventHandler ->> EventQueue: get()
+    
+    activate EventQueue
+    
+    EventQueue -->> EventHandler: [pygame.event]
+    
+    deactivate EventQueue
+    
+    GameOverLoop ->> EventHandler: handle_events()
+    
+    activate EventHandler
+    
+    EventHandler ->> EventHandler: handle_event(event)
+    
+    EventHandler ->> EventHandler: handle_game_over_event(event)
+    
+    EventHandler -->> GameOverLoop: commands (includes "input": username, "save": True)
+    
+    deactivate EventHandler
+    
+    GameOverLoop ->> GameOverLoop: handle_commands(commands)
+    
+    GameOverLoop ->> PointRepository: add(username, points)
+    
+    activate PointRepository
+    
+    PointRepository ->> PointRepository: write()
+    
+    PointRepository -->> GameOverLoop: 
+    
+    deactivate PointRepository
+    
+    deactivate GameOverLoop
+    
+```
+
