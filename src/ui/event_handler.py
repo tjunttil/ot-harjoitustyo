@@ -126,13 +126,18 @@ class EventHandler(UIService):
                 commands["delete"] = True
         return commands
 
+    def __handle_score_list_event(self, event):
+        commands = {}
+        return commands
+
     def handle_event(self, event):
         """A general-purpose method for handling any event, calls the 
         specific event -handling subroutines based on the view
         """
         view_handlers = [(self.game_view, self.__handle_game_event),
         (self.menu_view, self.__handle_menu_event),
-        (self.game_over_view, self.__handle_game_over_event)]
+        (self.game_over_view, self.__handle_game_over_event),
+        (self.score_list_view, self.__handle_score_list_event)]
         commands = {}
         commands["quit"] = self.__handle_quitting(event)
         for view_handler in view_handlers:
