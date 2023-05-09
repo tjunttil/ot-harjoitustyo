@@ -6,6 +6,7 @@ from services.gameoverloop import GameOverLoop
 from services.collision_handler import CollisionHandler
 from services.group_handler import GroupHandler
 from services.coordinate_system import CoordinateSystem
+from services.point_repository import PointRepository
 from .renderer import Renderer
 from .event_queue import EventQueue
 from .event_handler import EventHandler
@@ -19,6 +20,7 @@ class UI:
         self.__event_handler = EventHandler(self.__event_queue)
         self.__clock = Clock()
         self.__renderer = Renderer(self.__display)
+        self.__point_repository = PointRepository()
         pygame.display.set_caption("Asteroids")
 
     def switch_view(self, view = 0):
@@ -44,7 +46,8 @@ class UI:
         return game.start()
 
     def __start_game_over(self, points, space):
-        game_over = GameOverLoop(self.__renderer, self.__event_handler, self.__clock, points, space)
+        game_over = GameOverLoop(self.__renderer, self.__event_handler,
+        self.__clock, points, space, self.__point_repository)
         return game_over.start()
 
     def start(self, view, *args):

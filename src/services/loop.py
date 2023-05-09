@@ -1,5 +1,21 @@
 class Loop:
+    """A parent class for all ui-logic loops
+
+    Attributes:
+        renderer (Renderer): a renderer that draws ui-elements on the display
+        event_handler (EventHandler): an object that returns commands
+        corresponding to events
+        clock (Clock): a clock object
+
+    """
     def __init__(self, renderer, event_handler, clock):
+        """A constructor for the class
+
+        Args:
+            renderer (Renderer): a renderer that draws ui-elements on the display
+            event_handler (EventHandler): an object that returns commands
+            clock (Clock): a clock object
+        """
         self.__renderer = renderer
         self.__event_handler = event_handler
         self.__clock = clock
@@ -14,6 +30,15 @@ class Loop:
         return True
 
     def start(self):
+        """The method for handling the logic of the loop. Calls event_handler for
+        commands and a logic-method, determines if these result in a view switch,
+        then finally renders the view for this cycle if reachable.
+
+        Returns:
+            List: returns a list containing the name of the view to be switched to, and
+            the required parameters for rendering the view, if applicable. If quitting,
+            returns a list with False.
+        """
         running = True
         while running:
             commands_list = self.__event_handler.handle_events()

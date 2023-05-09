@@ -116,13 +116,14 @@ class EventHandler(UIService):
         return commands
 
     def __handle_game_over_event(self, event):
-        commands = {"character": False, "save": False}
+        commands = {"input": False, "save": False, "delete": False}
+        if event.type == pygame.TEXTINPUT:
+            commands["input"] = event.text
         if event.type == pygame.KEYDOWN:
-            for character in "qwertyuiopasdfghjklzxcvbnm":
-                if pygame.key.key_code(character) == event.key:
-                    commands["character"] = character
             if event.key == pygame.K_RETURN:
                 commands["save"] = True
+            if event.key == pygame.K_BACKSPACE:
+                commands["delete"] = True
         return commands
 
     def handle_event(self, event):
