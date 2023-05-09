@@ -21,13 +21,13 @@ class TestSpace(unittest.TestCase):
 
     def test_changed_velocity_changes_ship_position_with_move_ship(self):
         self.space.change_ship_velocity((1, 0), 1)
-        self.space.move_objects()
+        self.space._Space__move_objects()
         self.assertNotEqual(
             (tuple(self.space.ship.pos)), (320, 240))
 
     def test_changed_angular_velocity_changes_ship_angle_when_ship_moved(self):
         self.space.change_ship_velocity((0, 1), 1)
-        self.space.move_objects()
+        self.space._Space__move_objects()
         self.assertNotEqual(self.space.ship.angle, 0)
 
     def test_firing_ship_cannon_adds_plasma_to_plasmas_group(self):

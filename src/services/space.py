@@ -45,7 +45,7 @@ class Space:
         self.__group_handler.add(entity, group)
         self.__group_handler.add(entity, self.__all_entities)
 
-    def move_objects(self):
+    def __move_objects(self):
         for entity in self.__all_entities:
             entity.move()
 
@@ -56,7 +56,7 @@ class Space:
     def change_ship_velocity(self, direction, change):
         self.__ship.change_velocity(direction, change)
 
-    def check_collisions(self):
+    def __check_collisions(self):
         asteroid_destructions = self.__collision_handler.handle_plasma_hits(self.__plasmas,
         self.__asteroids)
         ship_destruction = self.__collision_handler.check_ship_destruction(
@@ -64,12 +64,20 @@ class Space:
         return asteroid_destructions, ship_destruction
         # self.handle_asteroid_collision()
 
-    def create_asteroid(self, difficulty):
+    def __create_asteroid(self, difficulty):
         if randint(20*difficulty,500) == 100:
             coordinates = self.__coordinate_system.random_coordinates(111,137)
             direction = self.__coordinate_system.random_direction(coordinates)
             asteroid = Asteroid(coordinates, direction, difficulty/3, 1)
             self.__add_entity(asteroid, self.__asteroids)
+
+    def update(self, difficulty):
+        self.__create_asteroid(difficulty)
+        self.__move_objects()
+        plasma_hits, ship_destruction = self.__check_collisions()
+        if ship_destruction:
+            return False
+        return plasma_hits
 
     @property
     def ship(self):

@@ -10,7 +10,11 @@ class GameLoop(Loop):
         return [self.__points, self.__space]
 
     def _logic_call(self):
-        return self.__update_space()
+        update = self.__space.update(self.__difficulty)
+        if isinstance(update, bool):
+            return "game over"
+        self.__points += update
+        return True
 
     def _handle_commands(self, commands):
         movement = commands["move"]
@@ -19,12 +23,3 @@ class GameLoop(Loop):
         if commands["fire"]:
             self.__space.fire_ship_cannon()
         return super()._handle_commands(commands)
-
-    def __update_space(self):
-        self.__space.create_asteroid(self.__difficulty)
-        self.__space.move_objects()
-        plasma_hits, ship_destruction = self.__space.check_collisions()
-        if ship_destruction:
-            return "game over"
-        self.__points += plasma_hits
-        return True

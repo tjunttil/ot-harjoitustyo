@@ -6,43 +6,55 @@ class Renderer(UIService):
 
     Attributes:
         display: the display to render to
+        title_font: the font object used for titles
+        item_font: the font object used for menu items
+        game_font: the font object used for the game user interface
     """
     def __init__(self, display):
         super().__init__()
         self.__display = display
+        self.title_font = pygame.font.SysFont("Arial", 60)
+        self.item_font = pygame.font.SysFont("Arial", 35)
+        self.game_font = pygame.font.SysFont("Arial", 20)
 
-    def draw_game_view(self, points, space):
+    def __draw_game_view(self, points, space):
         space.all_entities.draw(self.__display)
-        font = pygame.font.SysFont("Arial", 20)
-        point_text = font.render(f"Points: {points}", True, (255,255,255))
-        self.__display.blit(point_text, (0,0))
+        point_text = self.game_font.render(f"Points: {points}", True, (255,255,255))
+        return [(point_text,(0,0))]
 
-    def draw_game_over_view(self, points, space):
+    def __draw_game_over_view(self, points, space, username):
         space.all_entities.draw(self.__display)
-        font = pygame.font.SysFont("Arial", 40)
-        game_over_text = font.render("GAME OVER", True, (255, 0, 0))
-        points_text = font.render(f"POINTS: {points}", True, (255, 0, 0))
-        game_over_rect = game_over_text.get_rect(center = (320, 200))
-        points_rect = points_text.get_rect(center = (320, 240))
-        self.__display.blit(game_over_text, game_over_rect)
-        self.__display.blit(points_text, points_rect)
+        texts = []
+        contents = []
+        texts.append(self.title_font.render("GAME OVER", True, (255, 0, 0)))
+        texts.append(self.item_font.render(f"POINTS: {points}", True, (255, 0, 0)))
+        texts.append(self.item_font.render(
+            "Enter username to save score:", True, (255, 255, 255)))
+        texts.append(self.item_font.render(f"{username}", True, (255,0,0)))
+        for i in range(4):
+            contents.append((texts[i], texts[i].get_rect(center = (320, 160 + 50*i))))
+        # game_over_rect = game_over_text.get_rect(center = (320, 160))
+        # points_rect = points_text.get_rect(center = (320, 210))
+        # directions_rect = directions_text.get_rect(center = (320,260))
+        # username_rect = username_text.get
+        return contents
 
-    def draw_menu_view(self):
-        title_font = pygame.font.SysFont("Arial", 60)
-        title_text = title_font.render("ASTEROIDS", True, (255, 255, 255))
-        item_font = pygame.font.SysFont("Arial", 35)
-        start_new_game_text = item_font.render("Press Return for new game", True, (255, 255, 255))
+    def __draw_menu_view(self):
+        title_text = self.title_font.render("ASTEROIDS", True, (255, 255, 255))
+        start_new_game_text = self.item_font.render(
+            "Press Return for new game", True, (255, 255, 255))
         title_rect = title_text.get_rect(center = (320, 200))
         start_rect = start_new_game_text.get_rect(center = (320, 260))
-        self.__display.blit(title_text, title_rect)
-        self.__display.blit(start_new_game_text, start_rect)
+        return [(title_text,title_rect), (start_new_game_text,start_rect)]
 
-    def draw(self, points = 0, space = None):
+    def draw(self, *args):
         self.__display.fill((0,0,0))
-        if self.game_view:
-            self.draw_game_view(points, space)
-        if self.game_over_view:
-            self.draw_game_over_view(points, space)
-        if self.menu_view:
-            self.draw_menu_view()
+        view_handlers = [(self.game_view, self.__draw_game_view),
+        (self.menu_view, self.__draw_menu_view),
+        (self.game_over_view, self.__draw_game_over_view)]
+        for view, handler in view_handlers:
+            if view:
+                contents = handler(*args)
+        for content in contents:
+            self.__display.blit(content[0], content[1])
         pygame.display.update()

@@ -3,6 +3,8 @@ class UIService:
         self.__menu_view = True
         self.__game_view = False
         self.__game_over_view = False
+        self.__views = [self.__menu_view, self.__game_view,
+        self.game_over_view]
 
     @property
     def game_view(self):
@@ -34,3 +36,7 @@ class UIService:
         if isinstance(value, bool) and value:
             self.__game_over_view = value
             self.__game_view = not value
+
+    @property
+    def views(self):
+        return self.__views

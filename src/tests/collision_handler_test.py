@@ -51,11 +51,12 @@ class TestCollisionHandler(unittest.TestCase):
         self.assertEqual(hits, 10)
 
     def test_handle_plasma_hits_returns_number_of_destroyed_asteroids_when_superimposed(self):
+        destroyed = 0
         for position in self.test_positions:
             self.asteroids.add(Asteroid(position, 1,1,1))
-            for i in range(3):
-                shift = position.rotate(-90*i)/position.magnitude()
-                self.plasmas.add(Plasma(position + i*shift,shift))
-        plasmas = len(self.plasmas.sprites())
-        destroyed = self.collision_handler.handle_plasma_hits(self.plasmas, self.asteroids)
-        self.assertEqual((destroyed, plasmas), (10,30))
+        for i in range(3):
+            for asteroid in self.asteroids:
+                position = asteroid.pos
+                self.plasmas.add(Plasma(position, position))
+            destroyed += self.collision_handler.handle_plasma_hits(self.plasmas, self.asteroids)
+        self.assertEqual(destroyed, 10)

@@ -4,23 +4,9 @@ from services.space import Space
 from services.collision_handler import CollisionHandler
 from services.group_handler import GroupHandler
 from services.coordinate_system import CoordinateSystem
+from tests.loop_test import TestLoop, StubRenderer, StubEventHandler, StubClock
 
-class StubRenderer:
-    def draw(self):
-        pass
-
-class StubEventHandler:
-    def handle_event(self, event):
-        pass
-
-    def handle_events(self):
-        pass
-
-class StubClock:
-    def tick(self):
-        pass
-
-class TestGameLoop(unittest.TestCase):
+class TestGameLoop(TestLoop):
     def setUp(self):
         self.space = Space(GroupHandler(), CollisionHandler(), CoordinateSystem(640,480))
         self.gameloop = GameLoop(StubRenderer(), self.space,
