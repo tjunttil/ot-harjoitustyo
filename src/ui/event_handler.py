@@ -83,9 +83,10 @@ class EventHandler(UIService):
         return False
 
     def __handle_starting_game(self, event):
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-            return True
-        return False
+        return event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN
+
+    def __handle_starting_score_list(self, event):
+        return event.type == pygame.KEYDOWN and event.key == pygame.K_l
 
     def __handle_menu_event(self, event):
         """A method for handling events specific for the menu view,
@@ -99,6 +100,7 @@ class EventHandler(UIService):
         """
         commands = {}
         commands["start game"] = self.__handle_starting_game(event)
+        commands["start score list"] = self.__handle_starting_score_list(event)
         return commands
 
     def __handle_game_event(self, event):

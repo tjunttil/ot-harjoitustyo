@@ -3,6 +3,7 @@ from services.space import Space
 from services.gameloop import GameLoop
 from services.menuloop import MenuLoop
 from services.gameoverloop import GameOverLoop
+from services.scorelistloop import ScoreListLoop
 from services.collision_handler import CollisionHandler
 from services.group_handler import GroupHandler
 from services.coordinate_system import CoordinateSystem
@@ -32,6 +33,8 @@ class UI:
                 service.game_over_view = True
             if view == "menu":
                 service.menu_view = True
+            if view == "score list":
+                service.score_list_view = True
 
     def __start_menu(self):
         menu = MenuLoop(self.__renderer, self.__event_handler, self.__clock)
@@ -50,6 +53,11 @@ class UI:
         self.__clock, points, space, self.__point_repository)
         return game_over.start()
 
+    def __start_score_list(self):
+        score_list = ScoreListLoop(self.__renderer, self.__point_repository,
+        self.__event_handler, self.__clock)
+        return score_list.start()
+
     def start(self, view, *args):
         """A master loop for starting and switching between loops
 
@@ -57,7 +65,7 @@ class UI:
             view ([type]): [description]
         """
         starters = [("game", self.__start_game), ("menu", self.__start_menu),
-        ("game over", self.__start_game_over)]
+        ("game over", self.__start_game_over), ("score list", self.__start_score_list)]
         if isinstance(view, bool) and not view:
             return
         for starter in starters:
