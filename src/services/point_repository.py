@@ -47,11 +47,22 @@ class PointRepository:
         self.__points.sort(key = lambda x: x[1], reverse = True)
         self.__write()
 
-    def points_list(self):
+    def __filter_dates(self, points_list, days):
+        now = datetime.now()
+        def strip(entry):
+            return datetime.strptime(entry[2], "%d.%m.%Y")
+        return list(filter(lambda x: (strip(x) - now).days <= days, points_list))
+
+    def points_list(self, time):
         """A method that returns a list of the ten highest
         points-entries, sorted in decreasing order
 
         Returns:
             [tuple]: a list of tuples of form (username, points, date)
         """
-        return self.__points[:10]
+        points = self.__points
+        if time == "last week":
+            points = self.__filter_dates(points, 7)
+        if time == "last month":
+            points = self.__filter_dates(points, 30)
+        return points[:10]

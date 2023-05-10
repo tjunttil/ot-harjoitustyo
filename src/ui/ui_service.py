@@ -6,6 +6,11 @@ class UIService:
         self.__score_list_view = False
         self.__views = [self.__menu_view, self.__game_view,
         self.game_over_view, self.__score_list_view]
+        #self.__operations = [self.__menu_operation, self.__game_operation,
+        #self.__game_over_operation, self.__scorelist_operation]
+
+    def service_operation(self, *args):
+        pass
 
     @property
     def game_view(self):

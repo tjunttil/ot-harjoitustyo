@@ -44,23 +44,26 @@ class Renderer(UIService):
         start_new_game_text = self.item_font.render(
             "Press Return for new game", True, WHITE)
         view_score_list_text = self.item_font.render(
-            "Press the l-key to view scores", True, WHITE)
+            "Press the L-key to view scores", True, WHITE)
         title_rect = title_text.get_rect(center = (320, 180))
         start_rect = start_new_game_text.get_rect(center = (320, 250))
         score_rect = view_score_list_text.get_rect(center = (320, 300))
         return [(title_text,title_rect), (start_new_game_text,start_rect),
         (view_score_list_text, score_rect)]
 
-    def __draw_score_list_view(self, points_list):
+    def __draw_score_list_view(self, timeframe, points_list):
         contents = []
-        title_text = self.item_font.render("High scores", True, WHITE)
+        title_text = self.title_font.render("High scores", True, WHITE)
         title_rect = title_text.get_rect(center = (320, 50))
+        subtitle_text = self.item_font.render(f"{timeframe}", True, WHITE)
+        subtitle_rect = subtitle_text.get_rect(center = (320, 100))
         contents.append((title_text, title_rect))
+        contents.append((subtitle_text, subtitle_rect))
         for index, entry in enumerate(points_list):
             username, points, time = entry
             entry_text = self.game_font.render(
-                f"{index+1:2}{username:>30}:{points:3}{time:>20}", True, WHITE)
-            entry_rect = entry_text.get_rect(center = (120, 100 + 10*index))
+                f"{(index+1):>30}.{username:>12}:{points:3}{time:>20}", True, WHITE)
+            entry_rect = entry_text.get_rect(center = (160, 140 + 10*index))
             contents.append((entry_text, entry_rect))
         return contents
 

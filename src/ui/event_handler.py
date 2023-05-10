@@ -129,7 +129,14 @@ class EventHandler(UIService):
         return commands
 
     def __handle_score_list_event(self, event):
-        commands = {}
+        commands = {"all": False, "month":False, "week":False}
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_m:
+                commands["month"] = True
+            if event.key == pygame.K_w:
+                commands["week"] = True
+            if event.key == pygame.K_a:
+                commands["all"] = True
         return commands
 
     def handle_event(self, event):
