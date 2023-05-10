@@ -24,4 +24,4 @@ poetry run invoke start
 ## Pelin aloittaminen
 
 Ohjelman aloitusnäkymä on seuraava:
-![](.kuvat/aloitusnäkymä.png)
+![](./kuvat/aloitusnäkymä.png)
