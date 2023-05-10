@@ -26,3 +26,13 @@ poetry run invoke start
 Ohjelman aloitusnäkymä on seuraava:
 
 ![](./kuvat/aloitusnäkymä.png)
+
+Ohjeistuksen mukaisesti käyttäjä voi tästä Enter-näppäintä painamalla aloittaa uuden pelin, tai L-näppäintä painamalla siirtyä tarkastelemaan pistelistoja. Painamalla Enteriä näkymäksi tulee tämä:
+
+![](./kuvat/pelinäkymä.png)
+
+## Pelaaminen
+
+Alusta liikutetaan nuolinäppäimillä, ylänuolella eteen, alanuolella taakse, ja vasemmalla ja oikealla nuolinäppäimellä alusta saa käännettyä. Pelinäkymään ilmestyy asteroideja, joita pelaajan tulisi yrittää aluksella tuhota. Tämä onnistuu painamalla välilyöntinäppäintä, mikä laukaisee plasma-ammuksia. 
+
+![](./kuvat/asteroidien_ampuminen.png)
