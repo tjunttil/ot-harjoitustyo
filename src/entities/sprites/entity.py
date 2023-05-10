@@ -32,25 +32,25 @@ class Entity(pygame.sprite.Sprite):
         self.rect = pygame.Rect(coordinates[0], coordinates[1], 0,0)
         self.pos = pygame.Vector2(coordinates)
         self.direction = direction
-        self.velocity = velocity
+        self._velocity = velocity
         self.radius = 0
 
-    def update_position(self):
+    def _update_position(self):
         """A method for updating the positon of the entity over one timestep based on
         the direction and the velocity
         """
-        self.pos += self.direction * self.velocity
+        self.pos += self.direction * self._velocity
 
     def move(self):
         """A method used for moving entities in space. First updates the position,
         and then determines if this corresponds to a change in the integer-valued
         pygame-coordinates
         """
-        self.update_position()
+        self._update_position()
         delta = self.pos - pygame.math.Vector2(self.rect.center)
         self.rect.move_ip(int(delta[0]),int(delta[1]))
 
-    def load_image(self, image_name):
+    def _load_image(self, image_name):
         """A method to load the entity image and create a corresponding rect-object
 
         Args:

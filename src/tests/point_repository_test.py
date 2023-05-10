@@ -21,6 +21,8 @@ class TestPointRepository(unittest.TestCase):
         entry = points[0]
         self.assertEqual((entry[0], entry[1], entry[2]),
         self.points_a)
+        self.point_repository.add("",0)
+        self.assertEqual(self.point_repository.points_list(), points)
 
     def test_points_list(self):
         point_entries = [self.points_b, self.points_a]

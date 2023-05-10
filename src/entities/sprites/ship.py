@@ -1,6 +1,5 @@
 import pygame
 from .entity import Entity
-from .plasma import Plasma
 
 class Ship(Entity):
     """A class for representing ship state and changes to it.
@@ -24,30 +23,36 @@ class Ship(Entity):
             coordinates (tuple): the starting coordinates for the ship center
         """
         super().__init__(coordinates, pygame.math.Vector2(1,0), 0)
-        super().load_image("ship.png")
-        self.original_image = self.image
-        self.angle = 0
-        self.angular_velocity = 0
-        self.collide_points = self.calculate_collide_points()
+        super()._load_image("ship.png")
+        self.__original_image = self.image
+        self.__angle = 0
+        self.__angular_velocity = 0
+        self.collide_points = self.__calculate_collide_points()
 
     def change_velocity(self, direction, change):
-        linear_velocity, angular_velocity = direction
-        # direction is given by a tuple (v,a) where
-        # v denotes the linear velocity and
-        # a the angular velocity change direction
-        self.velocity += change*linear_velocity
-        self.angular_velocity += change*angular_velocity
+        """A method for changing the (linear or angular) velocity of the ship.
 
-    def rotate(self, angle):
-        self.image = pygame.transform.rotate(self.original_image, angle)
+        Args:
+            direction (tuple): the direction of the change, with the x-coordinate corresponding
+            to a change in linear velocity and the y-coordinate to a change in angular velocity,
+            with a positive value corresponding to a change in the positive direction
+            change (integer): a value (1 or -1) indicating whether the change itself is
+            positive, increasing the velocity, or negative, setting it to zero.
+        """
+        linear_velocity, angular_velocity = direction
+        self._velocity += change*linear_velocity
+        self.__angular_velocity += change*angular_velocity
+
+    def __rotate(self, angle):
+        self.image = pygame.transform.rotate(self.__original_image, angle)
         self.direction = pygame.math.Vector2(1,0).rotate(-angle)
-        self.collide_points = self.calculate_collide_points()
+        self.collide_points = self.__calculate_collide_points()
         self.rect = self.image.get_rect(center = self.rect.center)
 
-    def calculate_collide_points(self):
+    def __calculate_collide_points(self):
         center_vector = pygame.math.Vector2(self.rect.center)
-        ship_length_vector = self.direction * self.original_image.get_width()/2
-        ship_width_vector = self.direction.rotate(-90) * self.original_image.get_height()/4
+        ship_length_vector = self.direction * self.__original_image.get_width()/2
+        ship_width_vector = self.direction.rotate(-90) * self.__original_image.get_height()/4
         tip = center_vector + ship_length_vector
         left_side = center_vector + ship_width_vector
         right_side = center_vector - ship_width_vector
@@ -56,20 +61,39 @@ class Ship(Entity):
         back = center_vector - ship_length_vector
         return [tip, left_side, right_side, left_corner, right_corner, back]
 
-    def fire_plasma(self):
-        tip_location_vector = self.calculate_collide_points()[0]
-        return Plasma(tuple(tip_location_vector), self.direction)
-
-    def update_position(self):
-        self.angle += self.angular_velocity
-        super().update_position()
+    def _update_position(self):
+        """An override of the Entity update_position-method, updating the ship's
+        angle as well.
+        """
+        self.__angle += self.__angular_velocity
+        super()._update_position()
 
     def move(self):
-        self.update_position()
-        angle = self.angle
-        self.rotate(angle)
+        """An override of the Entity move-method, taking into account that the ship
+        has an angle and the direction of movement is in the direction of the tip
+        """
+        self._update_position()
+        angle = self.__angle
+        self.__rotate(angle)
         super().move()
 
-    def return_tip(self):
-        tip_location_vector = self.calculate_collide_points()[0]
+    def get_tip(self):
+        """A method for getting the location vector of the ship's tip
+
+        Returns:
+            pygame.Vector2: the location vector of the ship's tip
+        """
+        tip_location_vector = self.__calculate_collide_points()[0]
         return tip_location_vector
+
+    @property
+    def velocity(self):
+        return self._velocity
+
+    @property
+    def angle(self):
+        return self.__angle
+
+    @property
+    def angular_velocity(self):
+        return self.__angular_velocity

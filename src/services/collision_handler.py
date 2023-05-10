@@ -41,7 +41,7 @@ class CollisionHandler:
                     asteroid.kill()
         #     child_asteroids = a.fragment()
         #     for child in child_asteroids:
-        #         self.add_sprite(child)        
+        #         self.add_sprite(child)
         return points
 
     def handle_asteroid_collision(self):

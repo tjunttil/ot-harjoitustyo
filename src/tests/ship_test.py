@@ -15,8 +15,8 @@ class TestShip(unittest.TestCase):
         self.assertEqual(tuple(self.ship.pos), (320, 240))
 
     def test_update_position_changes_angle_when_angular_velocity_nonzero(self):
-        self.ship.angular_velocity = 1
-        self.ship.update_position()
+        self.ship.change_velocity((0,1),1)
+        self.ship._update_position()
         self.assertEqual(self.ship.angle, 1)
 
     def test_change_velocity_changes_ship_velocities_positive(self):
@@ -25,7 +25,7 @@ class TestShip(unittest.TestCase):
 
     def test_update_position_changes_coordinates_when_linear_velocity_positive(self):
         self.ship.change_velocity((1,0),1)
-        self.ship.update_position()
+        self.ship._update_position()
         self.assertEqual(tuple(self.ship.pos), (321,240))
 
     def test_change_velocity_changes_ship_velocities_negative(self):
@@ -33,9 +33,6 @@ class TestShip(unittest.TestCase):
         self.assertEqual((self.ship.velocity, self.ship.angular_velocity), (-1,-1))
 
     def test_rotating_by_90_degrees_changes_direction_to_perpendicular(self):
-        self.ship.rotate(-90)
+        self.ship._Ship__rotate(-90)
         self.assertEqual(tuple(self.ship.direction), (0,1))
 
-    def test_firing_creates_plasma_with_same_direction(self):
-        plasma = self.ship.fire_plasma()
-        self.assertEqual(self.ship.direction, plasma.direction)

@@ -46,9 +46,10 @@ class PointRepository:
             username (String): the username of the player
             points (tuple): the points gained
         """
-        self.__points.append((username, points, datetime.now().strftime("%d.%m.%Y")))
-        self.__points.sort(key = lambda x: x[1], reverse = True)
-        self.__write()
+        if username != "":
+            self.__points.append((username, points, datetime.now().strftime("%d.%m.%Y")))
+            self.__points.sort(key = lambda x: x[1], reverse = True)
+            self.__write()
 
     def __filter_dates(self, points_list, days):
         now = datetime.now()

@@ -1,6 +1,7 @@
 from random import randint
 from entities.sprites.ship import Ship
 from entities.sprites.asteroid import Asteroid
+from entities.sprites.plasma import Plasma
 
 
 class Space:
@@ -50,7 +51,12 @@ class Space:
             entity.move()
 
     def fire_ship_cannon(self):
-        plasma = self.__ship.fire_plasma()
+        """A method for adding a plasma object to plasmas with
+        the direction and location of the ship's tip
+        """
+        position = self.__ship.get_tip()
+        direction = self.__ship.direction
+        plasma = Plasma(tuple(position), direction)
         self.__add_entity(plasma, self.__plasmas)
 
     def change_ship_velocity(self, direction, change):

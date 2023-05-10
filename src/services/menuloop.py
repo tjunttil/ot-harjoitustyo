@@ -1,8 +1,10 @@
 from services.loop import Loop
 class MenuLoop(Loop):
     def _handle_commands(self, commands):
-        if commands["start game"]:
-            return "game"
-        if commands["start score list"]:
-            return "score list"
+        commands_keys = ["start game", "start score list"]
+        for key in commands_keys:
+            if key not in commands.keys():
+                raise KeyError("The format of the commands is not applicable to menu events")
+            if commands[key]:
+                return key[6:]
         return super()._handle_commands(commands)
