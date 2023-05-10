@@ -23,10 +23,13 @@ class PointRepository:
 
     def __read(self):
         points = []
-        with open_csv(self.file_path, "r", newline = '') as points_file:
-            reader = csv.reader(points_file, delimiter = ";")
-            for row in reader:
-                points.append((row[0],int(row[1]),row[2]))
+        try:
+            with open_csv(self.file_path, "r", newline = '') as points_file:
+                reader = csv.reader(points_file, delimiter = ";")
+                for row in reader:
+                    points.append((row[0],int(row[1]),row[2]))
+        except FileNotFoundError:
+            pass
         return points
 
     def __write(self):
@@ -53,7 +56,7 @@ class PointRepository:
             return datetime.strptime(entry[2], "%d.%m.%Y")
         return list(filter(lambda x: (strip(x) - now).days <= days, points_list))
 
-    def points_list(self, time):
+    def points_list(self, time = "all time"):
         """A method that returns a list of the ten highest
         points-entries, sorted in decreasing order
 

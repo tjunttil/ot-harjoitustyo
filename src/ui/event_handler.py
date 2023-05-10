@@ -88,36 +88,22 @@ class EventHandler(UIService):
     def __handle_starting_score_list(self, event):
         return event.type == pygame.KEYDOWN and event.key == pygame.K_l
 
-    def __handle_menu_event(self, event):
-        """A method for handling events specific for the menu view,
-        calls subroutines
-
-        Args:
-            event (pygame.event): the event to be handled
-
-        Returns:
-            dict: a dictionary of the commands for menu-specific events
-        """
+    def _menu_operation(self, *args):
+        event = args[0]
         commands = {}
         commands["start game"] = self.__handle_starting_game(event)
         commands["start score list"] = self.__handle_starting_score_list(event)
         return commands
 
-    def __handle_game_event(self, event):
-        """A method for handling game-events, calls subroutines
-
-        Args:
-            event (pygame.event): the event to be handled
-
-        Returns:
-            dictionary: contains the command-value pairs corresponding to the event
-        """
+    def _game_operation(self, *args):
+        event = args[0]
         commands = {}
         commands["move"] = self.__handle_movement(event)
         commands["fire"] = self.__handle_firing(event)
         return commands
 
-    def __handle_game_over_event(self, event):
+    def _game_over_operation(self, *args):
+        event = args[0]
         commands = {"input": False, "save": False, "delete": False}
         if event.type == pygame.TEXTINPUT:
             commands["input"] = event.text
@@ -128,7 +114,8 @@ class EventHandler(UIService):
                 commands["delete"] = True
         return commands
 
-    def __handle_score_list_event(self, event):
+    def _scorelist_operation(self, *args):
+        event = args[0]
         commands = {"all": False, "month":False, "week":False}
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_m:
@@ -139,26 +126,21 @@ class EventHandler(UIService):
                 commands["all"] = True
         return commands
 
-    def handle_event(self, event):
-        """A general-purpose method for handling any event, calls the 
-        specific event -handling subroutines based on the view
-        """
-        view_handlers = [(self.game_view, self.__handle_game_event),
-        (self.menu_view, self.__handle_menu_event),
-        (self.game_over_view, self.__handle_game_over_event),
-        (self.score_list_view, self.__handle_score_list_event)]
-        commands = {}
-        commands["quit"] = self.__handle_quitting(event)
-        for view_handler in view_handlers:
-            view, handler = view_handler
-            if view:
-                commands = {**(handler(event)), **commands}
-        return commands
+    def _basic_operations(self):
+        return {}
+
+    def _final_operations(self, data, *args):
+        event = args[0]
+        data["quit"] = self.__handle_quitting(event)
+        return data
+
+    def _combine(self, data1, data2):
+        return {**data1, **data2}
 
     def handle_events(self):
         events = self.__event_queue.get()
         commands_list = []
         for event in events:
-            commands_list.append(self.handle_event(event))
+            commands_list.append(self.service_operation(event))
         return commands_list
    

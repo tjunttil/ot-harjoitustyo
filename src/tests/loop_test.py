@@ -4,7 +4,7 @@ from services.loop import Loop
 events = ["banana", "apple", "quitting"]
 
 class StubRenderer:
-    def draw(self):
+    def service_operation(self):
         pass
 
 class StubEventHandler:

@@ -21,12 +21,26 @@ class Renderer(UIService):
         self.item_font = pygame.font.SysFont("Arial", 35)
         self.game_font = pygame.font.SysFont("Arial", 20)
 
-    def __draw_game_view(self, points, space):
+    def _menu_operation(self):
+        title_text = self.title_font.render("ASTEROIDS", True, WHITE)
+        start_new_game_text = self.item_font.render(
+            "Press Return for new game", True, WHITE)
+        view_score_list_text = self.item_font.render(
+            "Press the L-key to view scores", True, WHITE)
+        title_rect = title_text.get_rect(center = (320, 180))
+        start_rect = start_new_game_text.get_rect(center = (320, 250))
+        score_rect = view_score_list_text.get_rect(center = (320, 300))
+        return [(title_text,title_rect), (start_new_game_text,start_rect),
+        (view_score_list_text, score_rect)]
+
+    def _game_operation(self, *args):
+        points, space = args
         space.all_entities.draw(self.__display)
         point_text = self.game_font.render(f"Points: {points}", True, WHITE)
         return [(point_text,(0,0))]
 
-    def __draw_game_over_view(self, points, space, username):
+    def _game_over_operation(self, *args):
+        points, space, username = args
         space.all_entities.draw(self.__display)
         texts = []
         contents = []
@@ -39,19 +53,8 @@ class Renderer(UIService):
             contents.append((texts[i], texts[i].get_rect(center = (320, 160 + 50*i))))
         return contents
 
-    def __draw_menu_view(self):
-        title_text = self.title_font.render("ASTEROIDS", True, WHITE)
-        start_new_game_text = self.item_font.render(
-            "Press Return for new game", True, WHITE)
-        view_score_list_text = self.item_font.render(
-            "Press the L-key to view scores", True, WHITE)
-        title_rect = title_text.get_rect(center = (320, 180))
-        start_rect = start_new_game_text.get_rect(center = (320, 250))
-        score_rect = view_score_list_text.get_rect(center = (320, 300))
-        return [(title_text,title_rect), (start_new_game_text,start_rect),
-        (view_score_list_text, score_rect)]
-
-    def __draw_score_list_view(self, timeframe, points_list):
+    def _scorelist_operation(self, *args):
+        timeframe, points_list = args
         contents = []
         title_text = self.title_font.render("High scores", True, WHITE)
         title_rect = title_text.get_rect(center = (320, 50))
@@ -61,21 +64,17 @@ class Renderer(UIService):
         contents.append((subtitle_text, subtitle_rect))
         for index, entry in enumerate(points_list):
             username, points, time = entry
-            entry_text = self.game_font.render(
-                f"{(index+1):>30}.{username:>12}:{points:3}{time:>20}", True, WHITE)
-            entry_rect = entry_text.get_rect(center = (160, 140 + 10*index))
+            text = f"{(index+1)}. {username + ':':<12}{points:^3}{time:>20}"
+            entry_text = self.game_font.render(text, True, WHITE)
+            entry_rect = pygame.Rect(10, 140 + 25*index, 630, 25)
             contents.append((entry_text, entry_rect))
         return contents
 
-    def draw(self, *args):
+    def _basic_operations(self):
         self.__display.fill(BLACK)
-        view_handlers = [(self.game_view, self.__draw_game_view),
-        (self.menu_view, self.__draw_menu_view),
-        (self.game_over_view, self.__draw_game_over_view),
-        (self.score_list_view, self.__draw_score_list_view)]
-        for view, handler in view_handlers:
-            if view:
-                contents = handler(*args)
-        for content in contents:
+        return super()._basic_operations()
+
+    def _final_operations(self, data, *args):
+        for content in data:
             self.__display.blit(content[0], content[1])
         pygame.display.update()

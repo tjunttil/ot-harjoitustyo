@@ -52,6 +52,6 @@ class Loop:
             params = self._get_rendering_params()
             if not isinstance(view, bool):
                 return [view] + params
-            self.__renderer.draw(*params)
+            self.__renderer.service_operation(*params)
             self.__clock.tick(60)
         return [False]

@@ -15,8 +15,9 @@ class GameOverLoop(Loop):
         if commands["delete"]:
             self.__username = self.__username[:-1]
         if commands["save"]:
-            self.__point_repository.add(self.__username, self.__points)
-            return False
+            if self.__username != "":
+                self.__point_repository.add(self.__username, self.__points)
+                return False
         return super()._handle_commands(commands)
 
     def _get_rendering_params(self):
