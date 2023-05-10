@@ -67,9 +67,9 @@ sequenceDiagram
     
     activate EventHandler
     
-    EventHandler ->> EventHandler: handle_event()
+    EventHandler ->> EventHandler: service_operation(event)
     
-    EventHandler ->> EventHandler: handle_movement()
+    EventHandler ->> EventHandler: handle_movement(event)
     
     EventHandler ->> GameLoop: commands (includes "move": ((1,0),5))
     
@@ -116,9 +116,9 @@ sequenceDiagram
     
     activate EventHandler
     
-    EventHandler ->> EventHandler: handle_event(event)
+    EventHandler ->> EventHandler: service_operation(event)
     
-    EventHandler ->> EventHandler: handle_game_over_event(event)
+    EventHandler ->> EventHandler: game_over_operation(event)
     
     EventHandler -->> GameOverLoop: commands (includes "input": username, "save": True)
     
