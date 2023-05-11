@@ -39,7 +39,8 @@ class TestGameLoop(unittest.TestCase):
         commands = []
         truth_values = [True, False]
         for value in truth_values:
-            commands.append({"quit": False, "move": ((value, not value, value)), "fire": value, "return to menu": False})
+            commands.append({"quit": False, "move": ((value, not value, value)),
+            "fire": value, "return to menu": False})
         results = list(map(self.fakespace_gameloop._handle_commands, commands))
         self.assertEqual(results, [True, True])
 
