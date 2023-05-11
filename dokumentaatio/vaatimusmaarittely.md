@@ -8,7 +8,7 @@ asteroideja ohjaamallaan avaruusaluksella. Sovellus myös pitää kirjaa pelaaja
 saamista pisteistä ja pelissä käytetystä ajasta, joista molemmista on saatavilla 
 sijoituslistaukset.
 
-## Perusversion tarjoama toiminnallisuus
+## Tarjottu toiminnallisuus
 
 
 ### Ennen pelin aloitusta
