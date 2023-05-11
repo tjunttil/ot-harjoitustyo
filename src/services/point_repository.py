@@ -46,6 +46,8 @@ class PointRepository:
             username (String): the username of the player
             points (tuple): the points gained
         """
+        if not isinstance(username, str) or not isinstance(points, int):
+            raise ValueError("There has been an error in point entry input")
         if username != "":
             self.__points.append((username, points, datetime.now().strftime("%d.%m.%Y")))
             self.__points.sort(key = lambda x: x[1], reverse = True)

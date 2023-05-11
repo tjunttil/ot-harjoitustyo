@@ -22,6 +22,9 @@ class EventHandler(UIService):
         super().__init__()
         self.__event_queue = event_queue
 
+    def __key_press(self, event, key):
+        return event.type == pygame.KEYDOWN and event.key == key
+
     def __handle_movement(self, event):
         """A method for handling events leading to movement
 
@@ -51,20 +54,6 @@ class EventHandler(UIService):
                     return False
         return False
 
-    def __handle_firing(self, event):
-        """A method for handling events corresponding to firing the
-        ship plasma cannon (i.e. pressing ths space key)
-
-        Args:
-            event (pygame.event): the event to be handled
-
-        Returns:
-            Boolean: True if the space key is pressed down, False otherwise
-        """
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-            return True
-        return False
-
     def __handle_quitting(self, event):
         """Method for handling events leading to quitting (i.e. closing the application
         or pressing Escape key)
@@ -75,31 +64,25 @@ class EventHandler(UIService):
         Returns:
             Boolean: True if the event corresponds to quitting, False otherwise
         """
-        # Exit the game by pressing Escape key or closing the application 
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+        if self.__key_press(event, pygame.K_ESCAPE):
             return True
         if event.type == pygame.QUIT:
             return True
         return False
 
-    def __handle_starting_game(self, event):
-        return event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN
-
-    def __handle_starting_score_list(self, event):
-        return event.type == pygame.KEYDOWN and event.key == pygame.K_l
-
     def _menu_operation(self, *args):
         event = args[0]
         commands = {}
-        commands["start game"] = self.__handle_starting_game(event)
-        commands["start score list"] = self.__handle_starting_score_list(event)
+        commands["start game"] = self.__key_press(event, pygame.K_RETURN)
+        commands["start score list"] = self.__key_press(event, pygame.K_l)
         return commands
 
     def _game_operation(self, *args):
         event = args[0]
         commands = {}
         commands["move"] = self.__handle_movement(event)
-        commands["fire"] = self.__handle_firing(event)
+        commands["fire"] = self.__key_press(event, pygame.K_SPACE)
+        commands["stop"] = self.__key_press(event, pygame.K_q)
         return commands
 
     def _game_over_operation(self, *args):
@@ -132,6 +115,7 @@ class EventHandler(UIService):
     def _final_operations(self, data, *args):
         event = args[0]
         data["quit"] = self.__handle_quitting(event)
+        data["return to menu"] = self.__key_press(event, pygame.K_LCTRL)
         return data
 
     def _combine(self, data1, data2):

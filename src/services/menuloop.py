@@ -1,5 +1,10 @@
 from services.loop import Loop
 class MenuLoop(Loop):
+    """A loop for handling menu events
+
+    Args:
+        Loop (Loop): the parent class of MenuLoop, handling generic loop functions
+    """
     def _handle_commands(self, commands):
         commands_keys = ["start game", "start score list"]
         for key in commands_keys:

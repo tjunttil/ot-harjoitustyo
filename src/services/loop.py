@@ -21,6 +21,8 @@ class Loop:
         self.__clock = clock
 
     def _handle_commands(self, commands):
+        if commands["return to menu"]:
+            return "menu"
         return not commands["quit"]
 
     def _get_rendering_params(self):
