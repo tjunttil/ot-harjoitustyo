@@ -4,3 +4,4 @@ __pycache__
 htmlcov
 .DS_Store
 data/points.csv
+data/test-points.csv
