@@ -1,11 +1,11 @@
 # Arkkitehtuurikuvaus
 
 ## Rakenne
-Koodin rakenne on jakautunut hakemistotasolla seuraavasti: services-kansio sisältää pääasiallisesta sovelluslogiikasta vastaavat luokat, entities sisältää luokat objekteille joita pelilogiikka käsittelee, ja ui-kansio sisältää käyttöliittymän käsittelyyn liittyvät luokat.
+Koodin rakenne on jakautunut hakemistotasolla seuraavasti: services-kansio sisältää pääasiallisesta sovelluslogiikasta vastaavat luokat, entities sisältää luokat objekteille joita pelilogiikka käsittelee, ja ui-kansio sisältää käyttöliittymän käsittelyyn liittyvät luokat. Repositories-kansio sisältää sovelluksen ainoan repositorio-luokan, PointRepositoryn.
 
 
 ## Käyttöliittymä
-Käyttöliittymä koostuu tällä hetkellä kolmesta pääasiallisesta näkymästä, aloitusnäyttönäkymästä, pelinäkymästä ja lopetusnäkymästä. Näkymät on toteutettu EventHandler- ja Renderer-luokkien näille eriytetyillä metodeilla. Kunkin näkymän logiikalle on oma silmukkaluokkansa, joka perii Loop-luokan, ja UI-luokka ainoastaan kutsuu näiden silmukoiden aloitusmetodeita aiemman silmukan palautusarvon perusteella.
+Käyttöliittymä koostuu neljästä pääasiallisesta näkymästä, aloitusnäyttönäkymästä, pelinäkymästä, lopetusnäkymästä ja pistelistanäkymästä. Näkymät on toteutettu EventHandler- ja Renderer-luokkien näille eriytetyillä metodeilla. Kunkin näkymän logiikalle on oma silmukkaluokkansa, joka perii Loop-luokan, ja UI-luokka ainoastaan kutsuu näiden silmukoiden aloitusmetodeita aiemman silmukan palautusarvon perusteella.
 
 
 ## Sovelluslogiikka
@@ -42,6 +42,10 @@ Pelilogiikka koostuu Space objektin sisältämien Ship-, Plasma-, ja Asteroid-en
 ```
 
 Pelin korkeamman tason toiminnallisuus on toteutettu enimmäkseen luokan GameLoop kautta. GameLoop pyörittää pelisilmukkaa, kutsuen silmukan jokaisella kierroksella ui-kansion objektien metodeja hakeakseen käyttäjän syötteitä ja piirtääkseen pelinäkymän näytölle, ja näiden välissä kutsuu sille syötetyn Space-objektin metodeja päivittääkseen pelitilaa syötteiden mukaisesti. 
+
+## Tietojen pysyväistallennus
+
+PointRepository-luokka tallentaa ja lukee pistetietoja juurihakemistossa sijaitsevassa .env konfiguraatiotiedostossa määrättyyn tiedostoon. Pistetiedot ovat muodossa username;points;date, eli ensimmäisenä on pelaajan tunnus, toisena pelaajan saamat pisteet, ja viimeisenä suorituksen päivämäärä.
 
 ## Päätoiminnallisuudet
 
