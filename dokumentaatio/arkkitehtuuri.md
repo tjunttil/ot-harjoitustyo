@@ -49,6 +49,8 @@ Seuraavassa pelin päätoiminnallisuuksia on kuvattu sekvenssikaavioin.
 
 ### Aluksen liikuttaminen eteenpäin
 
+Alusta liikutetaan eteenpäin ylösnuolella. Alus liikkuu eteenpäin niin kauan kuin näppäin on painettu alas.
+
 ```mermaid
 
 sequenceDiagram
@@ -91,10 +93,13 @@ sequenceDiagram
     
     deactivate Space
     
-    
 ```
 
+Gameloop kutsuu toistuvasti EventHandleriä saadakseen uusia käskyjä, ja EventHandler saa EventQueuen tallentaman napinpainalluksen käsiteltäväksi. Se muuntaa tämän käskyksi muuttaa aluksen nopeutta, jonka se välittää GameLoopille. GameLoop kutsuu Spac-luokan change_ship_velocity-metodia jolla aluksen nopeutta muutetaan, joka taas kutsuu Ship-luokan vastaavaa metodia. 
+
 ## Plasman ampuminen
+
+Plasman ampuminen onnistuu välilyöntinäppäimellä. Toisin kuin liikkuessa, näppäimen pitäminen painettuna ei johda tapahtuman toistumiseen. Tapahtumaketjun alku on lähes identtinen aiempaan verrattuna. Ero tulee EventHandlerin lähettämässä käskyssä, joka tällä kertaa sisältää arvon True avaimelle "fire". Nyt GameLoop kutsuu taas Space-luokan metodia fire_ship_cannon, joka luo uuden Plasma-olion Ship-olion palauttamaan kärjen paikkaan, ja tallentaa tämän avaruuden entiteettien joukkoon.  
 
 ```mermaid
 
@@ -146,6 +151,8 @@ sequenceDiagram
 ```
 
 ## Pisteiden tallentaminen
+
+Perustoiminnallisuus käyttöliittymän osalta on sama kuin aiemmin kuvatuissa tapauksissa. Tällä kertaa sovelluslogiikkaa pyörittää GameOverLoop, joka saa EventQueuen ja EventHandlerin välittämänä käskyn ensin ottaa vastaan käyttäjän syöttämän nimen, ja sitten tallentaa tämän ja käyttäjän pelistä saaman pistemäärän. GameOverLoop kutsuu PointRepositoryn add-metodia lisätäkseen käyttäjän tiedot, joka taas kutsuu omaa write-metodiaan tallentaakseen päivitetyn pistetilanteen pysyväistallennukseen.
 
 ```mermaid
 
