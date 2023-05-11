@@ -20,7 +20,7 @@ Näille kullekin on tehty omat yksikkötestinsä omilla testausluokillaan toimin
 
 ### Repositoriot
 
-Sovelluksessa on yksi repositorio, PointRepository, johon tallennetaan ja josta luetaan pelaajien pistetuloksia. Tätä on testattu TestPointRepository-luokassa, jossa 
+Sovelluksessa on yksi repositorio, PointRepository, johon tallennetaan ja josta luetaan pelaajien pistetuloksia. Tätä on testattu TestPointRepository-luokassa, jossa käydään läpi yleisimmät perustoiminnallisuudelta vaadittavat tilanteet.  
 
 ### Testauskattavuus
 
