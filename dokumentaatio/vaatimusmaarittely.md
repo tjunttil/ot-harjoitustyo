@@ -8,40 +8,26 @@ asteroideja ohjaamallaan avaruusaluksella. Sovellus myös pitää kirjaa pelaaja
 saamista pisteistä ja pelissä käytetystä ajasta, joista molemmista on saatavilla 
 sijoituslistaukset.
 
-## Perusversion tarjoama toiminnallisuus
+## Tarjottu toiminnallisuus
 
 
 ### Ennen pelin aloitusta
 
-- Käyttäjä voi aloittaa uuden pelin painamalla Enteriä (tehty)
-- Käyttäjä voi valita haluaako hän tarkastella tuloslistoja vai aloittaa uuden 
-pelin
+- Käyttäjä voi aloittaa uuden pelin painamalla Enteriä
+- Käyttäjä voi tarkastella tuloslistoja painamalla L-näppäintä
 
 ### Tuloslistan tarkastelu
 
-- Listassa on pelaajat ja heidän saamansa pistemäärät listattuna pistemäärien mukaisessa järjestyksessä suurimmasta pienimpään
+- Listassa on kymmenen parasta pelaajaa ja heidän saamansa pistemäärät listattuna pistemäärien mukaisessa järjestyksessä suurimmasta pienimpään
+- Käyttäjä voi valita tarkasteleeko hän kaikkia, vai viimeisen 7 tai 30 päivän tuloksia
 
 ### Pelin aloituksen jälkeen
 
-- Käyttäjä pystyy ohjaamaan avaruusalusta nuolinäppäimillä (tehty)
-- Käyttäjä pystyy ampumaan avaruusaluksen lasertykillä välilyöntinäppäimellä (tehty)
-- Asteroideja ilmestyy ruudun reunojen takaa satunnaisesti (tehty)
-- Avaruusalus tuhoutuu ja peli päättyy jos alus törmää asteroidiin (tehty)
-- Asteroideja pystyy tuhoamaan lasertykillä, mistä saa pisteitä (tehty)
-- Pelaajan pistemäärä näkyy näytöllä (tehty)
+- Käyttäjä pystyy ohjaamaan avaruusalusta nuolinäppäimillä
+- Käyttäjä pystyy ampumaan avaruusaluksen lasertykillä välilyöntinäppäimellä
+- Asteroideja ilmestyy ruudun reunojen takaa satunnaisesti
+- Avaruusalus tuhoutuu ja peli päättyy jos alus törmää asteroidiin
+- Asteroideja pystyy tuhoamaan lasertykillä, mistä saa pisteitä
+- Pelaajan pistemäärä näkyy näytöllä
 - Pelin päätyttyä käyttäjä voi tallentaa tuloksensa tuloslistaan syöttämällä 
 pelaajanimen
-
-
-## Jatkokehitysideoita
-
-- Avaruusaluksen liikemäärä vähenee tasaisesti
-- Pelikentän topologia on torus
-- Näytön taustana on tähtitaivas
-- Asteroideja on erikokoisia, joista pienempiä on vaikeampi tuhota
-- Suuremmat asteroidit eivät vain häviä, vaan hajoavat pienemmiksi (jotka 
-säilyttävät suuremman asteroidin liikemäärän)
-- Asteroideja ilmestyy yhä useammin pelin edetessä, eli peli vaikeutuu
-- Näytöllä näkyy pelin kesto
-- Tuloslistassa on listattuna myös pelaajien pelissä selviämä aika, ja käyttäjä voi 
-valita kumman mukaan lista järjestetään
