@@ -94,6 +94,57 @@ sequenceDiagram
     
 ```
 
+## Plasman ampuminen
+
+```mermaid
+
+sequenceDiagram
+  
+    User ->> EventQueue: press space bar
+     
+    EventHandler ->> EventQueue: get()
+    
+    activate EventQueue
+    
+    EventQueue -->> EventHandler: [pygame.event]
+    
+    deactivate EventQueue
+    
+    GameLoop ->> EventHandler: handle_events()
+    
+    activate EventHandler
+    
+    EventHandler ->> EventHandler: service_operation(event)
+    
+    EventHandler ->> EventHandler: handle_game_event(event)
+    
+    EventHandler ->> GameLoop: commands (includes "fire": True)
+    
+    deactivate EventHandler
+    
+    GameLoop ->> Space: fire_ship_cannon()
+    
+    activate Space
+    
+    Space ->> Ship: get_tip()
+    
+    activate Ship
+    
+    Ship -->> Space: tip_location
+    
+    deactivate Ship
+    
+    Space ->> plasma: Plasma(tip_location, ship.direction)
+    
+    Space ->> Space: add_entity(plasma)
+    
+    Space -->> GameLoop: 
+    
+    deactivate Space
+    
+    
+```
+
 ## Pisteiden tallentaminen
 
 ```mermaid
