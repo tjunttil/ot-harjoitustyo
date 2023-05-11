@@ -24,10 +24,20 @@ Sovelluksessa on yksi repositorio, PointRepository, johon tallennetaan ja josta 
 
 ### Testauskattavuus
 
+Haarautumakattavuudeksi testeille saatiin 87%
+
+![](./kuvat/coverage-report.png)
+
 ## Integraatiotestaus
+
+Korkeamman tason luokkien, kuten Loop-tyypin-, ja Space-luokkien testit sisältävät väkisinkin useamman luokan yhteentoimivuuden testaamista. Näissä oli joskus kuitenkin tarpeen määritellä erillisiä testeihin käytettäviä paikanpitäjiä (esim StubRenderer tai FakeSpace) testauksen yksinkertaistamiseksi.
 
 ## Järjestelmätestaus
 
+Järjestelmätestaus on tapahtunut manuaalisesti kehittäjän toimesta.
+
 ### Asennus
+
+Asennus ja käyttö on testattu macOS- ja Linux-koneilla. 
 
 ### Toiminnallisuus
