@@ -99,7 +99,7 @@ Gameloop kutsuu toistuvasti EventHandleriä saadakseen uusia käskyjä, ja Event
 
 ## Plasman ampuminen
 
-Plasman ampuminen onnistuu välilyöntinäppäimellä. Toisin kuin liikkuessa, näppäimen pitäminen painettuna ei johda tapahtuman toistumiseen. Tapahtumaketjun alku on lähes identtinen aiempaan verrattuna. Ero tulee EventHandlerin lähettämässä käskyssä, joka tällä kertaa sisältää arvon True avaimelle "fire". Nyt GameLoop kutsuu taas Space-luokan metodia fire_ship_cannon, joka luo uuden Plasma-olion Ship-olion palauttamaan kärjen paikkaan, ja tallentaa tämän avaruuden entiteettien joukkoon.  
+Plasman ampuminen onnistuu välilyöntinäppäimellä. Toisin kuin liikkuessa, näppäimen pitäminen painettuna ei johda tapahtuman toistumiseen. 
 
 ```mermaid
 
@@ -150,9 +150,9 @@ sequenceDiagram
     
 ```
 
-## Pisteiden tallentaminen
+Tapahtumaketjun alku on lähes identtinen aiempaan verrattuna. Ero tulee EventHandlerin lähettämässä käskyssä, joka tällä kertaa sisältää arvon True avaimelle "fire". Nyt GameLoop kutsuu taas Space-luokan metodia fire_ship_cannon, joka luo uuden Plasma-olion Ship-olion palauttamaan kärjen paikkaan, ja tallentaa tämän avaruuden entiteettien joukkoon.  
 
-Perustoiminnallisuus käyttöliittymän osalta on sama kuin aiemmin kuvatuissa tapauksissa. Tällä kertaa sovelluslogiikkaa pyörittää GameOverLoop, joka saa EventQueuen ja EventHandlerin välittämänä käskyn ensin ottaa vastaan käyttäjän syöttämän nimen, ja sitten tallentaa tämän ja käyttäjän pelistä saaman pistemäärän. GameOverLoop kutsuu PointRepositoryn add-metodia lisätäkseen käyttäjän tiedot, joka taas kutsuu omaa write-metodiaan tallentaakseen päivitetyn pistetilanteen pysyväistallennukseen.
+## Pisteiden tallentaminen
 
 ```mermaid
 
@@ -197,4 +197,4 @@ sequenceDiagram
     deactivate GameOverLoop
     
 ```
-
+Perustoiminnallisuus pisteiden tallennuksessa käyttöliittymän osalta on sama kuin aiemmin kuvatuissa tapauksissa. Tällä kertaa sovelluslogiikkaa pyörittää GameOverLoop, joka saa EventQueuen ja EventHandlerin välittämänä käskyn ensin ottaa vastaan käyttäjän syöttämän nimen, ja sitten tallentaa tämän ja käyttäjän pelistä saaman pistemäärän. GameOverLoop kutsuu PointRepositoryn add-metodia lisätäkseen käyttäjän tiedot, joka taas kutsuu omaa write-metodiaan tallentaakseen päivitetyn pistetilanteen pysyväistallennukseen.
