@@ -43,7 +43,7 @@ class CoordinateSystem:
 
     def random_coordinates(self, object_width, object_height):
         """ Creates a random position for an object on the outer rim
-        of the coordinate system and a direction towards the interior.
+        of the coordinate system.
 
         Args:
             object_width (int): the width of the object

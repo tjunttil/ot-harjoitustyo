@@ -83,8 +83,7 @@ class Ship(Entity):
         Returns:
             pygame.Vector2: the location vector of the ship's tip
         """
-        tip_location_vector = self.__calculate_collide_points()[0]
-        return tip_location_vector
+        return self.collide_points[0]
 
     @property
     def velocity(self):

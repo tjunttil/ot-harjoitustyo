@@ -1,5 +1,16 @@
 from services.loop import Loop
 class GameLoop(Loop):
+    """A class for handling the game logic loop
+
+    Args:
+        Loop (Loop): the parent Loop class, provides core loop functionality
+
+    Attributes:
+        difficulty: the difficulty level of the game
+        space: the Space object associated with the game, contains entities and
+        methods for interacting with them
+        points: the current point score of the game
+    """
     def __init__(self, renderer, space, event_handler, clock):
         super().__init__(renderer, event_handler, clock)
         self.__difficulty = 3

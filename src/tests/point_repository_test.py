@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime
-from services.point_repository import PointRepository
+from repositories.point_repository import PointRepository
 from build import build
 
 class TestPointRepository(unittest.TestCase):

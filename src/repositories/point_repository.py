@@ -1,7 +1,7 @@
-import os
 import functools
 from datetime import datetime
 import csv
+from config import POINTSPATH
 
 open_csv = functools.partial(open, encoding = "utf-8")
 
@@ -17,8 +17,7 @@ class PointRepository:
     def __init__(self):
         """A constructor for the class
         """
-        dirname = os.path.dirname(__file__)
-        self.file_path = os.path.join(dirname, "..", "..", "data/points.csv")
+        self.file_path = POINTSPATH
         self.__points = self.__read()
 
     def __read(self):

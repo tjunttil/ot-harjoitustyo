@@ -22,3 +22,7 @@ class GameOverLoop(Loop):
 
     def _get_rendering_params(self):
         return (self.__points, self.__space, self.__username)
+
+    @property
+    def username(self):
+        return self.__username

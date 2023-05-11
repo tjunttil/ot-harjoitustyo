@@ -39,10 +39,4 @@ class CollisionHandler:
                 if asteroid.hits > 2:
                     points += 1
                     asteroid.kill()
-        #     child_asteroids = a.fragment()
-        #     for child in child_asteroids:
-        #         self.add_sprite(child)
         return points
-
-    def handle_asteroid_collision(self):
-        pass

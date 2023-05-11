@@ -7,7 +7,7 @@ from services.scorelistloop import ScoreListLoop
 from services.collision_handler import CollisionHandler
 from services.group_handler import GroupHandler
 from services.coordinate_system import CoordinateSystem
-from services.point_repository import PointRepository
+from repositories.point_repository import PointRepository
 from .renderer import Renderer
 from .event_queue import EventQueue
 from .event_handler import EventHandler

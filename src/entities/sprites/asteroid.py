@@ -13,6 +13,3 @@ class Asteroid(Entity):
     @property
     def hits(self):
         return self.__hits
-
-    def disintegrate(self):
-        pass
