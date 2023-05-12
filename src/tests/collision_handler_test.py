@@ -31,7 +31,7 @@ class TestCollisionHandler(unittest.TestCase):
         self.assertEqual(ship_destruction, False)
 
     def test_check_ship_destruction_returns_true_when_superimposed(self):
-        asteroid = Asteroid(self.test_position,1,1,1)
+        asteroid = Asteroid(self.test_position,1,1)
         self.asteroids.add(asteroid)
         ship_destruction = self.collision_handler.check_ship_destruction(self.ship, self.asteroids)
         self.assertEqual(ship_destruction, True)
@@ -43,7 +43,7 @@ class TestCollisionHandler(unittest.TestCase):
     def test_handle_plasma_hits_causes_hits_when_superimposed(self):
         hits = 0
         for position in self.test_positions:
-            self.asteroids.add(Asteroid(position, 1,1,1))
+            self.asteroids.add(Asteroid(position, 1,1))
             self.plasmas.add(Plasma(position,position))
         self.collision_handler.handle_plasma_hits(self.plasmas, self.asteroids)
         for asteroid in self.asteroids:
@@ -53,7 +53,7 @@ class TestCollisionHandler(unittest.TestCase):
     def test_handle_plasma_hits_returns_number_of_destroyed_asteroids_when_superimposed(self):
         destroyed = 0
         for position in self.test_positions:
-            self.asteroids.add(Asteroid(position, 1,1,1))
+            self.asteroids.add(Asteroid(position, 1,1))
         for i in range(3):
             for asteroid in self.asteroids:
                 position = asteroid.pos
