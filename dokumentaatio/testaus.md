@@ -24,7 +24,7 @@ Sovelluksessa on yksi repositorio, PointRepository, johon tallennetaan ja josta 
 
 ### Testauskattavuus
 
-Haarautumakattavuudeksi testeille saatiin 87%
+Haarautumakattavuudeksi testeille saatiin 86%
 
 ![](./kuvat/coverage-report.png)
 
