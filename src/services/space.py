@@ -74,7 +74,7 @@ class Space:
         if randint(20*difficulty,500) == 100:
             coordinates = self.__coordinate_system.random_coordinates(111,137)
             direction = self.__coordinate_system.random_direction(coordinates)
-            asteroid = Asteroid(coordinates, direction, difficulty/3, 1)
+            asteroid = Asteroid(coordinates, direction, difficulty/3)
             self.__add_entity(asteroid, self.__asteroids)
 
     def update(self, difficulty):
