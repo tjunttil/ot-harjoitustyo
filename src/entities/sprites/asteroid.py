@@ -1,7 +1,7 @@
 from .entity import Entity
 
 class Asteroid(Entity):
-    def __init__(self, coordinates, direction, velocity, size):
+    def __init__(self, coordinates, direction, velocity):
         super().__init__(coordinates, direction, velocity)
         super()._load_image("asteroid.png")
         self.__hits = 0
