@@ -26,8 +26,6 @@ Sovelluksessa on yksi repositorio, PointRepository, johon tallennetaan ja josta 
 
 Haarautumakattavuudeksi testeille saatiin 86%
 
-![](./kuvat/coverage-report.png)
-
 Testauksen ulkopuolelle jäivät käyttöliittymästä vastaavat luokat. Testauksessa on puutteita erityisesti ongelmallisten syötteiden käsittelyn tarkistamisessa.
 
 ## Integraatiotestaus
