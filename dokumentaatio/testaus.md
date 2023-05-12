@@ -16,7 +16,7 @@ Sovelluslogiikka on jaoteltu useamman luokan välille:
 - CollisionHandler
 - CoordinateSystem
 
-Näille kullekin on tehty omat yksikkötestinsä omilla testausluokillaan (luokalle `Luokka`nimellä `TestLuokka`) luokkakohtaisen toiminnallisuuden testaamiseksi. Loop-luokalle ja sen periville luokille on tehty Stub-luokat Renderer-, EventHandler- ja Clock-luokille jotta luokkia saa testattua irrallaan käyttöliittymästä, ja GroupHandlerille StubGroup abstrahoimaan testit soveltumaan yleisemmille ryhmäolioille, eikä vain pygamen sprite.Groupeille.
+Näille kullekin on tehty omat yksikkötestinsä omilla testausluokillaan (luokalle `Luokka`nimellä `TestLuokka`) luokkakohtaisen toiminnallisuuden testaamiseksi. Loop-luokalle ja sen periville luokille on tehty Stub-luokat Renderer-, EventHandler- ja Clock-luokille jotta luokkia saa testattua irrallaan käyttöliittymästä, ja GroupHandlerille StubGroup abstrahoimaan testit soveltumaan yleisemmille ryhmäolioille, eikä erityisesti pygamen sprite.Groupeille.
 
 ### Repositoriot
 
