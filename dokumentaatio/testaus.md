@@ -16,11 +16,11 @@ Sovelluslogiikka on jaoteltu useamman luokan välille:
 - CollisionHandler
 - CoordinateSystem
 
-Näille kullekin on tehty omat yksikkötestinsä omilla testausluokillaan toiminnallisuuden testaamiseksi, ja varmistettu että perustoiminnallisuus vastaa odotuksia myös poikkeuksellisissa tilanteissa. 
+Näille kullekin on tehty omat yksikkötestinsä omilla testausluokillaan (luokalle `Luokka`nimellä `TestLuokka`) luokkakohtaisen toiminnallisuuden testaamiseksi. Loop-luokalle ja sen periville luokille on tehty Stub-luokat Renderer-, EventHandler- ja Clock-luokille jotta luokkia saa testattua irrallaan käyttöliittymästä, ja GroupHandlerille StubGroup abstrahoimaan testit soveltumaan yleisemmille ryhmäolioille, eikä vain pygamen sprite.Groupeille.
 
 ### Repositoriot
 
-Sovelluksessa on yksi repositorio, PointRepository, johon tallennetaan ja josta luetaan pelaajien pistetuloksia. Tätä on testattu TestPointRepository-luokassa, jossa käydään läpi yleisimmät perustoiminnallisuudelta vaadittavat tilanteet.  
+Sovelluksessa on yksi repositorio, PointRepository, johon tallennetaan ja josta luetaan pelaajien pistetuloksia. Tätä on testattu TestPointRepository-luokassa, jossa käydään läpi yleisimmät perustoiminnallisuudelta vaadittavat tilanteet, ja joka käyttää hyväkseen omaa testitiedostoaan `test-points.csv`.  
 
 ### Testauskattavuus
 
@@ -32,11 +32,11 @@ Testauksen ulkopuolelle jäivät käyttöliittymästä vastaavat luokat. Testauk
 
 ## Integraatiotestaus
 
-Korkeamman tason luokkien, kuten Loop-tyypin-, ja Space-luokkien testit sisältävät väkisinkin useamman luokan yhteentoimivuuden testaamista. Näissä oli joskus kuitenkin tarpeen määritellä erillisiä testeihin käytettäviä paikanpitäjiä (esim StubRenderer tai FakeSpace) testauksen yksinkertaistamiseksi.
+Korkeamman tason luokkien, kuten Loop-tyypin-, ja Space-luokkien testit sisältävät useamman luokan yhteentoimivuuden testaamista. Näissä oli joskus kuitenkin tarpeen määritellä erillisiä testeihin käytettäviä paikanpitäjiä (esim StubRenderer tai FakeSpace) yksittäisen luokan toiminnallisuuden testauksen yksinkertaistamiseksi.
 
 ## Järjestelmätestaus
 
-Järjestelmätestaus on tapahtunut manuaalisesti kehittäjän toimesta.
+Järjestelmätason toiminnallisuutta on testattu perusteellisesti kehittäjän toimesta. Virheilmoituksia tai perustavanlaatuisia vikoja ei ole ilmennyt niitä etsiessäkään. 
 
 ### Asennus
 
